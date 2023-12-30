@@ -33,13 +33,25 @@ namespace BeautySalon.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Login(string userName, string password)
+        public ActionResult Login(string userName, string password, string imgcode)
         {
             if (string.IsNullOrEmpty(userName) || userName.Length == 0)
             {
                 return Content("Fail");
             }
             if (string.IsNullOrEmpty(password) || password.Length == 0)
+            {
+                return Content("Fail");
+            }
+            if (string.IsNullOrEmpty(imgcode) || imgcode.Length == 0)
+            {
+                return Content("Fail");
+            }
+            if (Session["CheckCode"] == null)
+            {
+                return Content("Fail");
+            }
+            if (!Session["CheckCode"].ToString().Equals(imgcode))
             {
                 return Content("Fail");
             }
