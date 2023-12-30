@@ -36,8 +36,8 @@
 
             <input name="ImgCode" lay-verify="required" placeholder="验证码" type="text" class="layui-input" style="width:180px;" />
 
-            <div style="float:right;margin:-30px auto;padding-right:20px">
-                <img style="border-radius:7px; cursor:pointer" id="ReloadImg" alt="验证码图片" height="30" onclick="Refresh(this)" title="点击刷新" src="/User/VerifyCode" />
+            <div style="float:right;margin:-5px auto;padding-right:20px">
+                <img style="border-radius:7px; cursor:pointer" id="ReloadImg" alt="验证码图片" height="50" onclick="Refresh(this)" title="点击刷新" src="/User/VerifyCode" />
             </div>
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
@@ -46,22 +46,26 @@
     </div>
 
     <script>
-        $(function  () {
-            layui.use('form', function(){
-              var form = layui.form;
-              // layer.msg('玩命卖萌中', function(){
-              //   //关闭后的操作
-              //   });
-              //监听提交
-              form.on('submit(login)', function(data){
-                // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='index.html'
+        $(function () {
+            layui.use('form', function () {
+                var form = layui.form;
+                // layer.msg('玩命卖萌中', function(){
+                //   //关闭后的操作
+                //   });
+                //监听提交
+                form.on('submit(login)', function (data) {
+                    // alert(888)
+                    layer.msg(JSON.stringify(data.field), function () {
+                        location.href = 'index.html'
+                    });
+                    return false;
                 });
-                return false;
-              });
             });
-        })
+        });
+
+        function Refresh(obj) {
+            $(obj).attr("src", "/User/VerifyCode?RndNumber=" + Math.random());
+        }
     </script>
 
 </body>

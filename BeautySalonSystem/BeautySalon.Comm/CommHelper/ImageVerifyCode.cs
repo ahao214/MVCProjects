@@ -56,7 +56,7 @@ namespace BeautySalon.Comm.CommHelper
 
             Random rnd = new Random();
             // 验证码长度为5位
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 strChkCode += chars[rnd.Next(chars.Length)];
             }
@@ -90,7 +90,7 @@ namespace BeautySalon.Comm.CommHelper
                 Color rndColor = colors[rnd.Next(colors.Length)];
 
                 g.DrawString(sChar, ft, new SolidBrush(rndColor), pointF);
-                pointF.X = sizeF.Width - sepDistance;
+                pointF.X += sizeF.Width - sepDistance;
             }
 
             // 画噪点
