@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautySalon.Models", "..\Be
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautySalon.DataDAL", "..\BeautySalonSystem\BeautySalon.DataDAL\BeautySalon.DataDAL.csproj", "{176FDAA4-951B-4BAE-9EF5-41BC2699C37C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautySalon.LogicBLL", "..\BeautySalonSystem\BeautySalon.LogicBLL\BeautySalon.LogicBLL.csproj", "{980CA50E-7660-42DA-B9B5-E5372F869D18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{176FDAA4-951B-4BAE-9EF5-41BC2699C37C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{176FDAA4-951B-4BAE-9EF5-41BC2699C37C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{176FDAA4-951B-4BAE-9EF5-41BC2699C37C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{980CA50E-7660-42DA-B9B5-E5372F869D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{980CA50E-7660-42DA-B9B5-E5372F869D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{980CA50E-7660-42DA-B9B5-E5372F869D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{980CA50E-7660-42DA-B9B5-E5372F869D18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{2480B0A8-3049-4010-B696-5F1E197FAA51} = {AF9ACA1C-0A53-4527-A951-64E221CDA06B}
 		{447457C7-1D73-405F-B020-AB6C53000705} = {AF9ACA1C-0A53-4527-A951-64E221CDA06B}
 		{176FDAA4-951B-4BAE-9EF5-41BC2699C37C} = {AF9ACA1C-0A53-4527-A951-64E221CDA06B}
+		{980CA50E-7660-42DA-B9B5-E5372F869D18} = {AF9ACA1C-0A53-4527-A951-64E221CDA06B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6E5C43E-E4CF-4076-B00A-6806E2C38329}
