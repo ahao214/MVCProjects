@@ -12,11 +12,43 @@ namespace BeautySalon.Controllers
     /// </summary>
     public class UserController : Controller
     {
+        #region Get请求登录页面
+        /// <summary>
+        /// Get请求登录页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         // GET: User
         public ActionResult Login()
         {
             return View();
         }
+        #endregion
+
+        #region Post发送验证请求
+        /// <summary>
+        /// Post发送验证请求
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Login(string userName, string password)
+        {
+            if (string.IsNullOrEmpty(userName) || userName.Length == 0)
+            {
+                return Content("Fail");
+            }
+            if (string.IsNullOrEmpty(password) || password.Length == 0)
+            {
+                return Content("Fail");
+            }
+
+            return Content("OK");
+        }
+        #endregion
+
+
 
 
         #region 显示验证码 

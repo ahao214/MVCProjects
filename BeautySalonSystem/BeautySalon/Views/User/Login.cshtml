@@ -57,14 +57,45 @@
                 form.on('submit(login)', function (data) {
                     
                     layer.load(3);
+                    $.ajax({
+                        url: '/User/Login',
+                        type: 'post',
+                        data: data.field,
+                        dataType: 'html',
+                        success: function (data) {                            
+                            if (data == "OK") {
+                                layer.alert("登录成功", {
+                                    icon: 6
+                                }, function () {
+                                    window.location.href = "/Home/Index";
+                                });
 
+                            } else {
+                                layer.alert("登录失败", { icon: 2 });
+                                RefreshImg();
+                            }
+                        },
+                        error: function (err) {
+                            layer.alert("登录失败", {
+                                icon: 2
+                            });
+                            RefreshImg();
+                        }
+                    });
+                    layer.closeAll("loading");
                     return false;
                 });
             });
         });
 
+        // 点击验证码，刷新验证码
         function Refresh(obj) {
             $(obj).attr("src", "/User/VerifyCode?RndNumber=" + Math.random());
+        }
+        // 登录失败，刷新验证码
+        function RefreshImg() {
+            $("#ReloadImg").attr("src", "/User/VerifyCode?RndNumber=" + Math.random());
+            
         }
     </script>
 
