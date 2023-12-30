@@ -28,6 +28,7 @@ namespace BeautySalon.Controllers
         {
             ImageVerifyCode imageVerify = new ImageVerifyCode();
             imageVerify.ValidateCode();
+            string code = Session["CheckCode"].ToString();
         }
 
         #endregion
