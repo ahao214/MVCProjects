@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautySalon.Comm.CommHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,12 +20,14 @@ namespace BeautySalon.Controllers
 
 
         #region 显示验证码 
+
         /// <summary>
         /// 显示验证码
         /// </summary>
         public void VerifyCode()
         {
-
+            ImageVerifyCode imageVerify = new ImageVerifyCode();
+            imageVerify.ValidateCode();
         }
 
         #endregion
