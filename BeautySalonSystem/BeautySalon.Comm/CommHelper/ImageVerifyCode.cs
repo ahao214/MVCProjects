@@ -54,7 +54,9 @@ namespace BeautySalon.Comm.CommHelper
             // 验证码字符集
             char[] chars = { '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M' };
 
-            Random rnd = new Random();
+            int seekTick = unchecked((int)DateTime.Now.Ticks);
+
+            Random rnd = new Random(seekTick);
             // 验证码长度为5位
             for (int i = 0; i < 1; i++)
             {
