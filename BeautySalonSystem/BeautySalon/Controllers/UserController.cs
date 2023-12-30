@@ -16,5 +16,21 @@ namespace BeautySalon.Controllers
         {
             return View();
         }
+
+
+        #region 显示验证码 
+        /// <summary>
+        /// 显示验证码
+        /// </summary>
+        public void VerifyCode()
+        {
+
+        }
+
+        #endregion
+
+
+
+
     }
 }
