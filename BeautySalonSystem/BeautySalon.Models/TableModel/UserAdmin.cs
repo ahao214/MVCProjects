@@ -15,5 +15,7 @@ namespace BeautySalon.Models.TableModel
         public decimal Salary { get; set; }
         public int UserStatus { get; set; }
 
+        public string ImgCode { get; set; } 
+
     }
 }

@@ -12,7 +12,7 @@ namespace BeautySalon.Comm.CommHelper
     /// <summary>
     /// 网页图片验证码
     /// </summary>
-    public class ImageVerifyCode
+    public sealed class ImageVerifyCode
     {
         #region 定义显示验证码的方法(Web格式的)
 

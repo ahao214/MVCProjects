@@ -1,4 +1,5 @@
 ﻿using BeautySalon.Comm.CommHelper;
+using BeautySalon.Models.TableModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,35 +34,46 @@ namespace BeautySalon.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Login(string userName, string password, string imgcode)
+        public ActionResult Login(UserAdmin userAdmin)
         {
-            if (string.IsNullOrEmpty(userName) || userName.Length == 0)
-            {
-                return Content("Fail");
-            }
-            if (string.IsNullOrEmpty(password) || password.Length == 0)
-            {
-                return Content("Fail");
-            }
-            if (string.IsNullOrEmpty(imgcode) || imgcode.Length == 0)
-            {
-                return Content("Fail");
-            }
-            if (Session["CheckCode"] == null)
-            {
-                return Content("Fail");
-            }
-            if (!Session["CheckCode"].ToString().Equals(imgcode))
-            {
-                return Content("Fail");
-            }
-
-            return Content("OK");
+            return Content(CheckInput(userAdmin.UserName, userAdmin.Password, userAdmin.ImgCode));
         }
         #endregion
 
+        #region 验证返回值
+        /// <summary>
+        /// 验证返回值
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="imgcode"></param>
+        /// <returns></returns>
+        private string CheckInput(string userName, string password, string imgcode)
+        {
+            if (string.IsNullOrEmpty(userName) || userName.Length == 0)
+            {
+                return "Fail";
+            }
+            if (string.IsNullOrEmpty(password) || password.Length == 0)
+            {
+                return "Fail";
+            }
+            if (string.IsNullOrEmpty(imgcode) || imgcode.Length == 0)
+            {
+                return "Fail";
+            }
+            if (Session["CheckCode"] is null)
+            {
+                return "Fail";
+            }
+            if (!Session["CheckCode"].ToString().Equals(imgcode, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return "WrongCode";
+            }
+            return "OK";
+        }
 
-
+        #endregion
 
         #region 显示验证码 
 
@@ -76,9 +88,6 @@ namespace BeautySalon.Controllers
         }
 
         #endregion
-
-
-
 
     }
 }

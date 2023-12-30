@@ -340,6 +340,10 @@
       <Project>{2480b0a8-3049-4010-b696-5f1e197faa51}</Project>
       <Name>BeautySalon.Comm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BeautySalon.Models\BeautySalon.Models.csproj">
+      <Project>{447457c7-1d73-405f-b020-ab6c53000705}</Project>
+      <Name>BeautySalon.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
