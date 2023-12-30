@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CommHelper\ImageVerifyCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\SecurityEncryption.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
