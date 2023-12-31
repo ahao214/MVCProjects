@@ -8,7 +8,7 @@ using System.Text;
 namespace BeautySalon.DataDAL.TableDAL
 {
     /// <summary>
-    /// 用户信息数据访问层
+    /// 用户数据访问类
     /// </summary>
     public abstract class UserAdminDAL
     {

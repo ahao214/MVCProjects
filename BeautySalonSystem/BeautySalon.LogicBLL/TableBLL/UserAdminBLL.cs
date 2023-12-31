@@ -11,9 +11,9 @@ using BeautySalon.DataDAL.TableDAL;
 namespace BeautySalon.LogicBLL.TableBLL
 {
     /// <summary>
-    /// 用户信息业务逻辑层
+    /// 用户业务逻辑类
     /// </summary>
-    public class UserAdminBLL
+    public sealed class UserAdminBLL
     {
         #region 得到用户信息(根据用户名和密码)
         /// <summary>
