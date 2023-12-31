@@ -1,4 +1,5 @@
 ﻿using BeautySalon.Comm.CommHelper;
+using BeautySalon.Comm.JsonHelper;
 using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
 using System;
@@ -14,6 +15,13 @@ namespace BeautySalon.Controllers
     /// </summary>
     public class UserController : Controller
     {
+        #region 返回json结果变量
+        /// <summary>
+        /// 返回json结果变量
+        /// </summary>
+        private readonly BsJsonResult bsJsonResult = new BsJsonResult(); 
+        #endregion
+
         #region 业务逻辑
 
         /// <summary>
