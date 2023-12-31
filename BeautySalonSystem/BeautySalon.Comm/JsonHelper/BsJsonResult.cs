@@ -11,18 +11,18 @@ namespace BeautySalon.Comm.JsonHelper
     /// </summary>
     public class BsJsonResult
     {
-        private JsonResultType resultType;
-        private string msg;
-
         public BsJsonResult()
         {
 
         }
 
-        public BsJsonResult(JsonResultType _resultType, string _msg)
+        public JsonResultType ResultType { get; set; }
+        public string Msg { get; set; }
+
+        public BsJsonResult(JsonResultType resultType, string msg)
         {
-            resultType = _resultType;
-            msg = _msg;
+            ResultType = resultType;
+            Msg = msg;
         }
 
         public string SuccessResult(string msg = "登录成功")

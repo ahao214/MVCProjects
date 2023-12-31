@@ -19,7 +19,7 @@ namespace BeautySalon.Controllers
         /// <summary>
         /// 返回json结果变量
         /// </summary>
-        private readonly BsJsonResult bsJsonResult = new BsJsonResult(); 
+        private readonly BsJsonResult bsJsonResult = new BsJsonResult();
         #endregion
 
         #region 业务逻辑
@@ -89,6 +89,7 @@ namespace BeautySalon.Controllers
             }
             if (!Session["CheckCode"].ToString().Equals(imgcode, StringComparison.InvariantCultureIgnoreCase))
             {
+                //return bsJsonResult.WrongCodeResult();
                 return "WrongCode";
             }
             if (userAdminBLL.GetUserAdmin(userAdmin) is null)
