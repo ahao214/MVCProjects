@@ -158,6 +158,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\aiwrap.png" />
     <Content Include="Images\bg.png" />
+    <Content Include="Js\jquery.min.js" />
+    <Content Include="Js\xadmin.js" />
+    <Content Include="Js\xcity.js" />
     <Content Include="Lab\layui\css\layui.css" />
     <Content Include="Lab\layui\css\layui.mobile.css" />
     <Content Include="Lab\layui\css\modules\code.css" />
