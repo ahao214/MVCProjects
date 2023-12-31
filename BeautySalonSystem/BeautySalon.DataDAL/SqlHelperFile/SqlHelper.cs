@@ -44,11 +44,11 @@ namespace BeautySalon.DataDAL.SqlHelperFile
         {
             if (conn is null) throw new ArgumentNullException("程序异常");
             SqlCommand cmd = new SqlCommand(sql, conn);
-            if(cmdType ==2)
+            if (cmdType == 2)
             {
                 cmd.CommandType = CommandType.StoredProcedure;
             }
-            if(conn .State !=ConnectionState.Open)
+            if (conn.State != ConnectionState.Open)
             {
                 conn.Close();
                 conn.Open();
@@ -57,7 +57,7 @@ namespace BeautySalon.DataDAL.SqlHelperFile
             {
                 cmd.Transaction = trans;
             }
-            if(paras !=null && paras.Length >0)
+            if (paras != null && paras.Length > 0)
             {
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddRange(paras);
@@ -68,7 +68,7 @@ namespace BeautySalon.DataDAL.SqlHelperFile
 
         #endregion
 
-        #region
+        #region 返回一个DataTable集合
 
         public static DataTable GetDataTable(string sql, int cmdType, params SqlParameter[] paras)
         {
@@ -80,6 +80,28 @@ namespace BeautySalon.DataDAL.SqlHelperFile
                 adapter.Fill(dt);
             }
             return dt;
+        }
+
+        #endregion
+
+        #region 执行增删改的SQL语句
+        /// <summary>
+        /// 执行增删改的SQL语句
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="cmdType"></param>
+        /// <param name="paras"></param>
+        /// <returns></returns>
+        public static int ExecuteNoneQuery(string sql, int cmdType, params SqlParameter[] paras)
+        {
+            int result = 0;
+            using (SqlConnection connection = CreateConn())
+            {
+                SqlCommand cmd = CreateCommand(connection, sql, cmdType, null, paras);
+                result = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
+            return result;
         }
 
         #endregion
