@@ -20,19 +20,19 @@ namespace BeautySalon.DataDAL.TableDAL
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static UserAdmin GetUserAdmin (UserAdmin input)
+        public static UserAdmin GetUserAdmin(UserAdmin input)
         {
             UserAdmin userAdmin = default;
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new StringBuilder();
             sb.Append("SELECT * FROM UserAdmin WHERE UserName=@UserName AND Password=@Password AND UserStatus=1");
-            
+
             SqlParameter[] paras =
             {
                 new SqlParameter ("@UserName",input.UserName),
                 new SqlParameter ("@Password",input.Password.StringToMdFive())
             };
 
-            DataTable dt = SqlHelper.GetDataTable(sb.ToString(),1, paras);
+            DataTable dt = SqlHelper.GetDataTable(sb.ToString(), 1, paras);
             foreach (DataRow dr in dt.Rows)
             {
                 userAdmin = new UserAdmin
@@ -45,6 +45,28 @@ namespace BeautySalon.DataDAL.TableDAL
             return userAdmin;
         }
         #endregion
+
+        #region 登录成功后,更新用户登录的IP地址
+        /// <summary>
+        /// 登录成功后,更新用户登录的IP地址
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool UpdateLoginIP(UserAdmin input)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("UPDATE UserAdmin SET LoginIP=@LoginIP WHERE UserId=@UserId");
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@LoginIP",input .LoginIP),
+                new SqlParameter ("@UserId",input .UserId ),
+            };
+
+            return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
+        }
+
+        #endregion
+
 
     }
 }

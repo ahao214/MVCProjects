@@ -15,6 +15,7 @@ namespace BeautySalon.Controllers
     /// </summary>
     public class UserController : Controller
     {
+
         #region 返回json结果变量
         /// <summary>
         /// 返回json结果变量

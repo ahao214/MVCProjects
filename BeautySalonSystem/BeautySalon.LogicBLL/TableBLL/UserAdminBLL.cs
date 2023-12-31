@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BeautySalon.Models.TableModel;
 using BeautySalon.DataDAL.TableDAL;
+using BeautySalon.DataDAL.SqlHelperFile;
 
 namespace BeautySalon.LogicBLL.TableBLL
 {
@@ -26,6 +27,20 @@ namespace BeautySalon.LogicBLL.TableBLL
             return UserAdminDAL.GetUserAdmin(input);
         }
         #endregion
+
+        #region 登录成功后,更新用户登录的IP地址
+        /// <summary>
+        /// 登录成功后,更新用户登录的IP地址
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public bool UpdateLoginIP(UserAdmin input)
+        {
+            return UserAdminDAL.UpdateLoginIP(input);
+        }
+
+        #endregion
+
 
     }
 }
