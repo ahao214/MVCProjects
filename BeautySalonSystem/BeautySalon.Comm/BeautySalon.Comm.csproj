@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommHelper\ImageVerifyCode.cs" />
+    <Compile Include="DefineHelper\CommDefine.cs" />
     <Compile Include="JsonHelper\BsJsonHelper.cs" />
     <Compile Include="JsonHelper\BsJsonResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
