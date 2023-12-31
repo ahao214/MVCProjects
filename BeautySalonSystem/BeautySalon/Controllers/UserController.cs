@@ -1,4 +1,5 @@
 ﻿using BeautySalon.Comm.CommHelper;
+using BeautySalon.Comm.DefineHelper;
 using BeautySalon.Comm.JsonHelper;
 using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
@@ -93,10 +94,18 @@ namespace BeautySalon.Controllers
                 //return bsJsonResult.WrongCodeResult();
                 return "WrongCode";
             }
-            if (userAdminBLL.GetUserAdmin(userAdmin) is null)
+            UserAdmin successAdmin = userAdminBLL.GetUserAdmin(userAdmin);
+            if (successAdmin is null)
             {
                 return "Fail";
             }
+            // 登录成功后,获取用户登录的IP地址
+            successAdmin.LoginIP = CommDefine.GetClientIP();
+            if(!userAdminBLL.UpdateLoginIP(successAdmin ))
+            {
+                return "Fail";
+            }
+            Session["LoginUser"] = successAdmin;
             return "OK";
         }
 
