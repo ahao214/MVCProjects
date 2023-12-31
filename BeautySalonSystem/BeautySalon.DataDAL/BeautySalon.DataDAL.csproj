@@ -47,6 +47,10 @@
     <Compile Include="TableDAL\UserAdminDAL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeautySalon.Comm\BeautySalon.Comm.csproj">
+      <Project>{2480B0A8-3049-4010-B696-5F1E197FAA51}</Project>
+      <Name>BeautySalon.Comm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BeautySalon.Models\BeautySalon.Models.csproj">
       <Project>{447457C7-1D73-405F-B020-AB6C53000705}</Project>
       <Name>BeautySalon.Models</Name>

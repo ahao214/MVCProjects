@@ -1,4 +1,5 @@
 ﻿using BeautySalon.Comm.CommHelper;
+using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,17 @@ namespace BeautySalon.Controllers
     /// </summary>
     public class UserController : Controller
     {
+        #region 业务逻辑
+
+        /// <summary>
+        /// 业务逻辑(用户)
+        /// </summary>
+        private readonly UserAdminBLL userAdminBLL = new UserAdminBLL();
+
+        #endregion
+
+
+
         #region Get请求登录页面
         /// <summary>
         /// Get请求登录页面
@@ -36,7 +48,7 @@ namespace BeautySalon.Controllers
         [HttpPost]
         public ActionResult Login(UserAdmin userAdmin)
         {
-            return Content(CheckInput(userAdmin.UserName, userAdmin.Password, userAdmin.ImgCode));
+            return Content(CheckUserInfo(userAdmin));
         }
         #endregion
 
@@ -44,12 +56,13 @@ namespace BeautySalon.Controllers
         /// <summary>
         /// 验证返回值
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <param name="imgcode"></param>
+        /// <param name="userAdmin"></param>
         /// <returns></returns>
-        private string CheckInput(string userName, string password, string imgcode)
+        private string CheckUserInfo(UserAdmin userAdmin)
         {
+            string userName = userAdmin.UserName;
+            string password = userAdmin.Password;
+            string imgcode = userAdmin.ImgCode;
             if (string.IsNullOrEmpty(userName) || userName.Length == 0)
             {
                 return "Fail";
@@ -70,10 +83,15 @@ namespace BeautySalon.Controllers
             {
                 return "WrongCode";
             }
+            if (userAdminBLL.GetUserAdmin(userAdmin) is null)
+            {
+                return "Fail";
+            }
             return "OK";
         }
 
         #endregion
+
 
         #region 显示验证码 
 

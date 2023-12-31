@@ -1,4 +1,5 @@
 ﻿
+using BeautySalon.Comm.Security;
 using BeautySalon.DataDAL.SqlHelperFile;
 using BeautySalon.Models.TableModel;
 using System.Data;
@@ -24,10 +25,11 @@ namespace BeautySalon.DataDAL.TableDAL
             UserAdmin userAdmin = default;
             StringBuilder sb = new StringBuilder ();
             sb.Append("SELECT * FROM UserAdmin WHERE UserName=@UserName AND Password=@Password AND UserStatus=1");
+            
             SqlParameter[] paras =
             {
                 new SqlParameter ("@UserName",input.UserName),
-                new SqlParameter ("@Password",input.Password)
+                new SqlParameter ("@Password",input.Password.StringToMdFive())
             };
 
             DataTable dt = SqlHelper.GetDataTable(sb.ToString(),1, paras);
