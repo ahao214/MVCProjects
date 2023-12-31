@@ -21,7 +21,7 @@ namespace BeautySalon.LogicBLL.TableBLL
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static UserAdmin GetUserAdmin(UserAdmin input)
+        public UserAdmin GetUserAdmin(UserAdmin input)
         {
             return UserAdminDAL.GetUserAdmin(input);
         }
