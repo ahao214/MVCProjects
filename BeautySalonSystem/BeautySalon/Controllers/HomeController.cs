@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace BeautySalon.Controllers
 {
-    [BeautySalonFilter]
+    [BeautySalonFilter] // 加特性,实现权限验证
     public class HomeController : Controller
     {
         public ActionResult Index()
