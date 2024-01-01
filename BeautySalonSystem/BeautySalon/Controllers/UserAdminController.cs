@@ -12,6 +12,17 @@ namespace BeautySalon.Controllers
             return View();
         }
 
+        #region 修改密码
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ModifyPass()
+        {
+            return View();
+        } 
+        #endregion
+
         #region 退出登录
         /// <summary>
         /// 退出登录
