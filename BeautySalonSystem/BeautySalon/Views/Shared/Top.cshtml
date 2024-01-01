@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿@using BeautySalon.Models.TableModel
+
+<div class="container">
     <div class="logo">
         <a href="/Home/Index">美容院管理系统</a>
     </div>
@@ -40,17 +42,25 @@
     </ul>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">
+                @{
+                    if (!(Session["LoginUser"] is null))
+                    {
+                        UserAdmin userAdmin = Session["LoginUser"] as UserAdmin;
+                        @userAdmin.UserName;
+                    }
+                }
+            </a>
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd>
-                    <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a>
+                    <a onclick="xadmin.open('个人信息','/UserAdmin/AccountInfo')">个人信息</a>
                 </dd>
                 <dd>
-                    <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a>
+                    <a onclick="xadmin.open('切换帐号','')">切换帐号</a>
                 </dd>
                 <dd>
-                    <a href="./login.html">退出</a>
+                    <a href="/UserAdmin/LogOut">退出</a>
                 </dd>
             </dl>
         </li>
