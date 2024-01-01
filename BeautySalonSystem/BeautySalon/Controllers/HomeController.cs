@@ -13,10 +13,9 @@ namespace BeautySalon.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Welcome()
         {
-            ViewBag.Message = "Your application description page.";
-
+            
             return View();
         }
 
