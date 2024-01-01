@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BeautySalon.Filter;
 using System.Web.Mvc;
-using System.Web.Razor.Generator;
 
 namespace BeautySalon.Controllers
 {
+    [BeautySalonFilter] // 特性
     public class UserAdminController : Controller
     {
         // GET: UserAdmin
