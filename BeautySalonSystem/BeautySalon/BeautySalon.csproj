@@ -315,6 +315,7 @@
     <Content Include="Views\Shared\RightContent.cshtml" />
     <Content Include="Views\Shared\_LayoutOtherMaster.cshtml" />
     <Content Include="Views\UserAdmin\AccountInfo.cshtml" />
+    <Content Include="Views\UserAdmin\ModifyPass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

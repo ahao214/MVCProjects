@@ -96,9 +96,15 @@ namespace BeautySalon.Controllers
         /// 修改密码
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult ModifyPass()
         {
-            return View();
+            UserAdmin userAdmin = default;
+            if (!(Session["LoginUser"] is null))
+            {
+                userAdmin = Session["LoginUser"] as UserAdmin;
+            }
+            return View(userAdmin);
         }
         #endregion
 
