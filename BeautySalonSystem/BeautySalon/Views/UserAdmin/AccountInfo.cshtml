@@ -1,4 +1,7 @@
-﻿
+﻿@using BeautySalon.Models.TableModel
+
+@model UserAdmin
+
 @{
     ViewBag.Title = "个人信息";
     Layout = "~/Views/Shared/_LayoutOtherMaster.cshtml";
@@ -12,7 +15,7 @@
                     <span class="x-red">*</span>登录账号
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" readonly="readonly" id="L_UserName" name="UserName" required="" lay-verify="UserName" autocomplete="off" class="layui-input">
+                    <input type="text" readonly="readonly" id="L_UserName" name="UserName" required="" lay-verify="UserName" autocomplete="off" class="layui-input" value="@Model.UserName">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>将会成为您唯一的登入名
@@ -23,7 +26,7 @@
                     <span class="x-red">*</span>真实姓名
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_realname" name="RealName" required="" lay-verify="NickRealName" autocomplete="off" class="layui-input">
+                    <input type="text" id="L_realname" name="RealName" required="" lay-verify="NickRealName" autocomplete="off" class="layui-input" value="@Model.RealName">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -31,7 +34,7 @@
                     <span class="x-red">*</span>电话
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_Telphone" name="Telphone" required="" lay-verify="Telphone" autocomplete="off" class="layui-input">
+                    <input type="text" id="L_Telphone" name="Telphone" required="" lay-verify="Telphone" autocomplete="off" class="layui-input" value="@Model.Telphone">
                 </div>
                 <div class="layui-form-mid layui-word-aux">默认手机号是11位数字</div>
             </div>
@@ -40,7 +43,7 @@
                     <span class="x-red"></span>登录IP
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" readonly="readonly" id="L_LoginIP" name="LoginIP" required="" autocomplete="off" class="layui-input">
+                    <input type="text" readonly="readonly" id="L_LoginIP" name="LoginIP" required="" autocomplete="off" class="layui-input" value="@Model.LoginIP">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -48,7 +51,7 @@
                     <span class="x-red"></span>登录时间
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" readonly="readonly" id="L_LoginTime" name="LoginTime" required="" autocomplete="off" class="layui-input">
+                    <input type="text" readonly="readonly" id="L_LoginTime" name="LoginTime" required="" autocomplete="off" class="layui-input" value="@Model.LoginTime">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -56,7 +59,8 @@
                     <span class="x-red"></span>修改时间
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" value="@DateTime.Now.ToString()" readonly="readonly" id="L_ModifyTime" name="ModifyTime" required="" autocomplete="off" class="layui-input">
+                    @{string sModifyTime= Model.ModifyTime.ToString() ?? DateTime.Now.ToString();}
+                    <input type="text" value="sModifyTime" readonly="readonly" id="L_ModifyTime" name="ModifyTime" required="" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -64,7 +68,7 @@
                     <span class="x-red"></span>每月薪水
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" readonly="readonly" id="L_Salary" name="Salary" required="" autocomplete="off" class="layui-input">
+                    <input type="text" readonly="readonly" id="L_Salary" name="Salary" required="" autocomplete="off" class="layui-input" value="@Model.Salary">
                 </div>
             </div>
             <div class="layui-form-item">

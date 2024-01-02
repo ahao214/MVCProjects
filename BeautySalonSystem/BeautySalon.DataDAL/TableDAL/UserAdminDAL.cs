@@ -1,5 +1,4 @@
-﻿
-using BeautySalon.Comm.Security;
+﻿using BeautySalon.Comm.Security;
 using BeautySalon.DataDAL.SqlHelperFile;
 using BeautySalon.Models.TableModel;
 using System;
@@ -82,7 +81,7 @@ namespace BeautySalon.DataDAL.TableDAL
 
             SqlParameter[] paras =
             {
-                new SqlParameter ("@UserId",input.UserId)
+                new SqlParameter ("@UserId",userId)
             };
 
             DataTable dt = SqlHelper.GetDataTable(sb.ToString(), 1, paras);
