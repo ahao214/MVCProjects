@@ -406,6 +406,7 @@ body {
 
 .layui-table td, .layui-table th {
     min-width: 80px;
+    text-align:center;
 }
 
 table th, table td {
