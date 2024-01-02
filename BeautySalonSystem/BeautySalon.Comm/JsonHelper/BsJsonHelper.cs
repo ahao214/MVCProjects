@@ -2,17 +2,15 @@
 
 namespace BeautySalon.Comm.JsonHelper
 {
-    /// <summary>
-    /// 扩展方法(字符转JSON)
-    /// </summary>
+   
     public static class BsJsonHelper
     {
+        /// <summary>
+        /// 扩展方法(字符转JSON)
+        /// </summary>
         public static string StringToJson(this BsJsonResult jsonResult)
         {
             return JsonConvert.SerializeObject(jsonResult);
-
         }
-
-
     }
 }

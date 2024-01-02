@@ -4,9 +4,6 @@ using BeautySalon.Comm.JsonHelper;
 using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BeautySalon.Controllers
@@ -75,38 +72,46 @@ namespace BeautySalon.Controllers
             string imgcode = userAdmin.ImgCode;
             if (string.IsNullOrEmpty(userName) || userName.Length == 0)
             {
-                return "Fail";
+                return bsJsonResult.ErrorResult();
+                //return "Fail";
             }
             if (string.IsNullOrEmpty(password) || password.Length == 0)
             {
-                return "Fail";
+                return bsJsonResult.ErrorResult();
+                //return "Fail";
             }
             if (string.IsNullOrEmpty(imgcode) || imgcode.Length == 0)
             {
-                return "Fail";
+                return bsJsonResult.ErrorResult();
+                //return "Fail";
             }
             if (Session["CheckCode"] is null)
             {
-                return "Fail";
+                return bsJsonResult.ErrorResult();
+                //return "Fail";
             }
             if (!Session["CheckCode"].ToString().Equals(imgcode, StringComparison.InvariantCultureIgnoreCase))
             {
-                //return bsJsonResult.WrongCodeResult();
-                return "WrongCode";
+                return bsJsonResult.WrongCodeResult();
+                //return "WrongCode";
             }
             UserAdmin successAdmin = userAdminBLL.GetUserAdmin(userAdmin);
             if (successAdmin is null)
             {
-                return "Fail";
+                return bsJsonResult.ErrorResult();
+                //return "Fail";
             }
             // 登录成功后,获取用户登录的IP地址
             successAdmin.LoginIP = CommDefine.GetClientIP();
             if(!userAdminBLL.UpdateLoginIP(successAdmin ))
             {
-                return "Fail";
+                return bsJsonResult.ErrorResult();
+                //return "Fail";
             }
             Session["LoginUser"] = successAdmin;
-            return "OK";
+            return bsJsonResult.SuccessResult();
+            
+            //return "OK";
         }
 
         #endregion

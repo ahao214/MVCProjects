@@ -61,36 +61,36 @@
                         url: '/User/Login',
                         type: 'post',
                         data: data.field,
-                        dataType: 'html',
+                        dataType: 'json',
                         success: function (data) {
-                            if (data == "OK") {
-                                layer.alert("登录成功", {
-                                    icon: 6
-                                }, function () {
-                                    window.location.href = "/Home/Index";
-                                });
-                            } else if (data == "WrongCode") {
-                                layer.alert("验证码错误", { icon: 2 });
-                                RefreshImg();
-                            } else {
-                                layer.alert("登录失败", { icon: 2 });
-                                RefreshImg();
-                            }
-
-
-                            //if (data.ResultType == 1) {
-                            //    layer.alert(data.Msg, {
+                            //if (data == "OK") {
+                            //    layer.alert("登录成功", {
                             //        icon: 6
                             //    }, function () {
                             //        window.location.href = "/Home/Index";
                             //    });
-                            //} else if (data.ResultType == 2) {
-                            //    layer.alert(data.Msg, { icon: 2 });
+                            //} else if (data == "WrongCode") {
+                            //    layer.alert("验证码错误", { icon: 2 });
                             //    RefreshImg();
                             //} else {
-                            //    layer.alert(data.Msg, { icon: 2 });
+                            //    layer.alert("登录失败", { icon: 2 });
                             //    RefreshImg();
                             //}
+
+
+                            if (data.ResultType == 1) {
+                                layer.alert(data.Msg, {
+                                    icon: 6
+                                }, function () {
+                                    window.location.href = "/Home/Index";
+                                });
+                            } else if (data.ResultType == 2) {
+                                layer.alert(data.Msg, { icon: 2 });
+                                RefreshImg();
+                            } else {
+                                layer.alert(data.Msg, { icon: 2 });
+                                RefreshImg();
+                            }
                         },
                         error: function (err) {
                             layer.alert("登录失败", {
