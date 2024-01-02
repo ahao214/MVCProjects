@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -26,6 +27,20 @@ namespace BeautySalon.Comm.DefineHelper
             return clientIP;
         }
         #endregion
+
+        #region 判断输入的是否为汉字
+        /// <summary>
+        /// 判断输入的是否为汉字
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static bool IsChinese(string val)
+        {
+            return Regex.IsMatch(val, @"^[\u4e00-\u9fa5]{2,10}$");
+        }
+
+        #endregion
+
 
     }
 }
