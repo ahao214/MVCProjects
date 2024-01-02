@@ -2,6 +2,7 @@
 using BeautySalon.DataDAL.SqlHelperFile;
 using BeautySalon.Models.TableModel;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -148,6 +149,40 @@ namespace BeautySalon.DataDAL.TableDAL
             };
 
             return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
+        }
+        #endregion
+
+        #region 获取所有用户信息
+        /// <summary>
+        /// 获取所有用户信息
+        /// </summary>        
+        /// <returns></returns>
+        public static List<UserAdmin> GetUserAdmin()
+        {
+            UserAdmin userAdmin = default;
+            List<UserAdmin> list = new List<UserAdmin>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT * FROM UserAdmin ORDER BY UserId ASC");
+
+            DataTable dt = SqlHelper.GetDataTable(sb.ToString(), 1);
+            foreach (DataRow dr in dt.Rows)
+            {
+                userAdmin = new UserAdmin
+                {
+                    UserId = (int)dr["UserId"],
+                    UserName = (string)dr["UserName"],
+                    Password = (string)dr["Password"],
+                    RealName = (string)dr["RealName"],
+                    Telphone = (string)dr["Telphone"],
+                    LoginIP = (string)dr["LoginIP"],
+                    LoginTime = (DateTime)dr["LoginTime"],
+                    ModifyTime = (DateTime)dr["ModifyTime"],
+                    Salary = (decimal)dr["Salary"],
+                    UserStatus = (int)dr["UserStatus"],
+                };
+                list.Add(userAdmin);
+            }
+            return list;
         }
         #endregion
 

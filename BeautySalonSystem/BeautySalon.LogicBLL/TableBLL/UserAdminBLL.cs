@@ -4,6 +4,8 @@ using BeautySalon.DataDAL.SqlHelperFile;
 using System.Data.SqlClient;
 using System.Text;
 using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace BeautySalon.LogicBLL.TableBLL
 {
@@ -73,7 +75,17 @@ namespace BeautySalon.LogicBLL.TableBLL
         }
         #endregion
 
+        #region 获取所有用户信息
+        /// <summary>
+        /// 获取所有用户信息
+        /// </summary>        
+        /// <returns></returns>
+        public List<UserAdmin> GetUserAdmin()
+        {
+            return UserAdminDAL.GetUserAdmin();
 
+        }
+        #endregion
 
     }
 }
