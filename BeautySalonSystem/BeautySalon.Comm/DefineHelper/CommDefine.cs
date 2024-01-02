@@ -41,6 +41,19 @@ namespace BeautySalon.Comm.DefineHelper
 
         #endregion
 
+        #region 判断输入的是否为手机号
+        /// <summary>
+        /// 判断输入的是否为手机号
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static bool IsPhone(string val)
+        {
+            return Regex.IsMatch(val, @"^1[0123456789]\d{9}$");
+        }
+
+        #endregion
+
 
     }
 }
