@@ -66,7 +66,8 @@ namespace BeautySalon.Controllers
         private string CheckUserInfo(UserAdmin userAdmin)
         {
             string realName = userAdmin.RealName;
-            string telephone = userAdmin.Telphone;            
+            string telephone = userAdmin.Telphone;
+            userAdmin.UserId = ((UserAdmin)(Session["LoginUser"])).UserId;
             if (string.IsNullOrEmpty(realName) || realName.Length == 0)
             {
                 return bsJsonResult.ErrorResult("真实姓名必须为汉字");
@@ -79,7 +80,10 @@ namespace BeautySalon.Controllers
             {
                 return bsJsonResult.ErrorResult("手机号必须是11位");
             }
-
+            if (!userAdminBLL.UpdateUserAdmin(userAdmin))
+            {
+                return bsJsonResult.ErrorResult("更新失败");
+            }
             return bsJsonResult.SuccessResult("资料更新成功");
         }
 
