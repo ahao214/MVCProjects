@@ -61,7 +61,17 @@ namespace BeautySalon.LogicBLL.TableBLL
         }
         #endregion
 
-
+        #region 更新用户密码
+        /// <summary>
+        /// 更新用户密码
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public bool UpdateUserPwd(UserAdmin userAdmin)
+        {
+            return UserAdminDAL.UpdateUserPwd(userAdmin);
+        }
+        #endregion
 
 
 

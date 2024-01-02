@@ -129,7 +129,27 @@ namespace BeautySalon.DataDAL.TableDAL
         }
         #endregion
 
+        #region 更新用户密码
+        /// <summary>
+        /// 更新用户密码
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public static bool UpdateUserPwd(UserAdmin userAdmin)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("UPDATE UserAdmin SET Password=@Password,ModifyTime=@ModifyTime WHERE UserId=@UserId AND UserStatus=1");
 
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@UserId",userAdmin.UserId),
+                new SqlParameter ("@Password",userAdmin.Password.StringToMdFive()),
+                new SqlParameter ("@ModifyTime",DateTime.Now)
+            };
+
+            return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
+        }
+        #endregion
 
     }
 }

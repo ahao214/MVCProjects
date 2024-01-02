@@ -25,9 +25,9 @@ namespace BeautySalon.Controllers
         #endregion
 
 
-        #region 登录账户信息
+        #region 登录账户信息页面
         /// <summary>
-        /// 登录账户信息
+        /// 登录账户信息页面
         /// </summary>
         /// <returns></returns>
         public ActionResult AccountInfo()
@@ -91,9 +91,9 @@ namespace BeautySalon.Controllers
 
 
 
-        #region 修改密码
+        #region 修改密码页面
         /// <summary>
-        /// 修改密码
+        /// 修改密码页面
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -106,6 +106,53 @@ namespace BeautySalon.Controllers
             }
             return View(userAdmin);
         }
+        #endregion
+
+        #region 密码验证
+        /// <summary>
+        /// 密码验证
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public ActionResult UpdatePwd(UserAdmin userAdmin)
+        {
+            return Content(CheckPassword(userAdmin));
+        }
+
+        #endregion
+
+
+        #region 验证返回值
+        /// <summary>
+        /// 验证返回值
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        private string CheckPassword(UserAdmin userAdmin)
+        {
+            string password = userAdmin.Password;
+            string rePassword = userAdmin.RePassword;
+            userAdmin.UserId = ((UserAdmin)(Session["LoginUser"])).UserId;
+            if (string.IsNullOrEmpty(password))
+            {
+                return bsJsonResult.ErrorResult("密码不能为空");
+            }
+            if (password.Length < 6 || password.Length > 12)
+            {
+                return bsJsonResult.ErrorResult("密码必须6到12位");
+            }
+            if (!password.Equals(rePassword))
+            {
+                return bsJsonResult.ErrorResult("两次密码不一致");
+            }
+
+            if (!userAdminBLL.UpdateUserPwd(userAdmin))
+            {
+                return bsJsonResult.ErrorResult("密码更新失败");
+            }
+            return bsJsonResult.SuccessResult("密码更新成功");
+        }
+
         #endregion
 
         #region 退出登录

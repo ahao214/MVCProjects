@@ -7,6 +7,7 @@ namespace BeautySalon.Models.TableModel
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public string RePassword { get; set; }
         public string RealName { get; set; }
         public string Telphone { get; set; }
         public string LoginIP { get; set; }

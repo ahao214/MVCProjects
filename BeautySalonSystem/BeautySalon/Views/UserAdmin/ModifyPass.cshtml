@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "密码修改";
     Layout = "~/Views/Shared/_LayoutOtherMaster.cshtml";
-    
+
 }
 
 
@@ -28,20 +28,20 @@
                     <span class="x-red">*</span>密码
                 </label>
                 <div class="layui-input-inline">
-                    <input type="password" id="L_Password" name="Password" required="" lay-verify="pass" autocomplete="off" class="layui-input" >
+                    <input type="password" id="L_Password" name="Password" required="" lay-verify="pass" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">6到16个字符</div>
             </div>
             <div class="layui-form-item">
-                <label for="L_Repass" class="layui-form-label">
+                <label for="L_RePassword" class="layui-form-label">
                     <span class="x-red">*</span>确认密码
                 </label>
                 <div class="layui-input-inline">
-                    <input type="password" id="L_Repass" name="repass" required="" lay-verify="repass" autocomplete="off" class="layui-input">
+                    <input type="password" id="L_RePassword" name="RePassword" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label"></label>
+                <label for="L_RePassword" class="layui-form-label"></label>
                 <button class="layui-btn" lay-filter="updatePwd" lay-submit="">修改密码</button>
             </div>
         </form>
@@ -50,15 +50,14 @@
 <script>
     layui.use(['form', 'layer', 'jquery'],
         function () {
-            $ = layui.jquery;
-            var form = layui.form,
-                layer = layui.layer;
+            var form = layui.form;
+            var layer = layui.layer;
 
             //自定义验证规则
             form.verify({
                 pass: [/(.+){6,12}$/, '密码必须6到12位'],
                 repass: function (value) {
-                    if ($('#L_Password').val() != $('#L_Repass').val()) {
+                    if ($('#L_Password').val() != $('#L_RePassword').val()) {
                         return '两次密码不一致';
                     }
                 }
@@ -68,6 +67,39 @@
             form.on('submit(updatePwd)',
                 function (data) {
                     console.log("修改密码")
+                    layer.load(3);
+                    $.ajax({
+                        url: '/UserAdmin/UpdatePwd',
+                        type: 'post',
+                        data: data.field,
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            console.log(data.Msg);
+                            console.log(data.ResultType);
+                            var sMsg = data.Msg;
+                            var sFail = data.Msg;
+                            if (data.ResultType == 1) {
+                                // 更新成功
+                                layer.alert(sMsg, { icon: 6 }, function () {
+                                    xadmin.close();
+                                });
+                            }
+                            else if (data.ResultType == 2) {
+
+                            }
+                            else {
+                                // 更新失败
+                                layer.alert(sMsg, { icon: 2 });
+                            }
+                        },
+                        error: function (err) {
+                            layer.alert("密码更新失败", { icon: 2 });
+                        }
+                    });
+
+                    layer.closeAll("loading");
+                    return false;
                 });
 
         });</script>
