@@ -88,12 +88,7 @@
                         return '真实姓名至少得2个字符';
                     }
                 },
-                Telphone: [/(.+){6,12}$/, '电话必须6到12位'],
-                repass: function (value) {
-                    if ($('#L_pass').val() != $('#L_repass').val()) {
-                        return '两次密码不一致';
-                    }
-                }
+                Telphone: [/^1[0123456789]\d{9}$/, '手机号码必须是11位']               
             });
 
             //监听提交
