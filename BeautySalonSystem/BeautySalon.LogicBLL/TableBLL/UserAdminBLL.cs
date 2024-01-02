@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BeautySalon.Models.TableModel;
+﻿using BeautySalon.Models.TableModel;
 using BeautySalon.DataDAL.TableDAL;
 using BeautySalon.DataDAL.SqlHelperFile;
+using System.Data.SqlClient;
+using System.Text;
+using System;
 
 namespace BeautySalon.LogicBLL.TableBLL
 {
@@ -52,6 +48,22 @@ namespace BeautySalon.LogicBLL.TableBLL
             return UserAdminDAL.GetUserAdminById(userId);
         }
         #endregion
+
+        #region 更新用户信息(根据用户ID)
+        /// <summary>
+        /// 更新用户信息(根据用户ID)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public bool UpdateUserAdminById(UserAdmin userAdmin)
+        {
+            return UserAdminDAL.UpdateUserAdminById(userAdmin);
+        }
+        #endregion
+
+
+
+
 
     }
 }

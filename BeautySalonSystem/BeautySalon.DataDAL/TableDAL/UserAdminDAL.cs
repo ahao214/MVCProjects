@@ -105,7 +105,29 @@ namespace BeautySalon.DataDAL.TableDAL
         }
         #endregion
 
+        #region 更新用户信息(根据用户ID)
+        /// <summary>
+        /// 更新用户信息(根据用户ID)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool UpdateUserAdminById(UserAdmin userAdmin)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("UPDATE UserAdmin SET RealName=@RealName,Telphone=@Telphone,ModifyTime=@ModifyTime WHERE UserId=@UserId AND UserStatus=1");
 
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@UserId",userAdmin.UserId),
+                new SqlParameter ("@RealName",userAdmin.RealName),
+                new SqlParameter ("@Telphone",userAdmin.Telphone),
+                new SqlParameter ("@ModifyTime",DateTime.Now)
+            };
+
+            return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
+
+        }
+        #endregion
 
 
 
