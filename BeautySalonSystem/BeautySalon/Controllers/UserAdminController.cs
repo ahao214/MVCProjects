@@ -1,4 +1,6 @@
-﻿using BeautySalon.Filter;
+﻿using BeautySalon.Comm.DefineHelper;
+using BeautySalon.Comm.JsonHelper;
+using BeautySalon.Filter;
 using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
 using System.Web.Mvc;
@@ -8,6 +10,13 @@ namespace BeautySalon.Controllers
     [BeautySalonFilter] // 特性
     public class UserAdminController : Controller
     {
+        #region 返回json结果变量
+        /// <summary>
+        /// 返回json结果变量
+        /// </summary>
+        private readonly BsJsonResult bsJsonResult = new BsJsonResult();
+        #endregion
+
         #region 业务逻辑(用户)
         /// <summary>
         /// 业务逻辑(用户)
@@ -33,6 +42,50 @@ namespace BeautySalon.Controllers
             return View(userAdmin);
         }
         #endregion
+
+        #region 发送资料更新验证
+        /// <summary>
+        /// 发送资料更新验证
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public ActionResult UpdateAccount(UserAdmin userAdmin)
+        {
+
+            return Content(CheckUserInfo(userAdmin));
+        }
+
+        #endregion
+
+        #region 验证返回值
+        /// <summary>
+        /// 验证返回值
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        private string CheckUserInfo(UserAdmin userAdmin)
+        {
+            string realName = userAdmin.RealName;
+            string telephone = userAdmin.Telphone;            
+            if (string.IsNullOrEmpty(realName) || realName.Length == 0)
+            {
+                return bsJsonResult.ErrorResult("真实姓名必须为汉字");
+            }
+            if (!CommDefine.IsChinese(realName))
+            {
+                return bsJsonResult.ErrorResult("真实姓名必须为汉字");
+            }
+            if (!CommDefine.IsPhone(telephone))
+            {
+                return bsJsonResult.ErrorResult("手机号必须是11位");
+            }
+
+            return bsJsonResult.SuccessResult("资料更新成功");
+        }
+
+        #endregion
+
+
 
         #region 修改密码
         /// <summary>

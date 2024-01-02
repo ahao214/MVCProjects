@@ -81,7 +81,7 @@
 <script>
     layui.use(['form', 'layer', 'jquery'],
         function () {
-            $ = layui.jquery;
+            //$ = layui.jquery;
             var form = layui.form;
             var layer = layui.layer;
 
@@ -98,20 +98,56 @@
             //监听提交
             form.on('submit(add)',
                 function (data) {
-                    console.log(data);
-                    //发异步，把数据提交给php
-                    layer.alert("增加成功", {
-                        icon: 6
-                    },
-                        function () {
-                            //关闭当前frame
-                            xadmin.close();
+                    layer.load(3);
+                    var sFail = "";
+                    $.ajax({
+                        url: '/UserAdmin/UpdateAccount',
+                        type: 'post',
+                        data: data.field,
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            console.log(data.Msg);
+                            console.log(data.ResultType);
+                            var sMsg = data.Msg;
+                            var sFail = data.Msg;
+                            if (data.ResultType == 1) {
+                                // 更新成功
+                                layer.alert(sMsg, { icon: 6 }, function () {
+                                    xadmin.close();                                    
+                                });
+                            }
+                            else{
+                                // 更新失败
+                                layer.alert(sMsg, { icon: 2 });
+                            }
+                        },
+                        error: function (err) {
+                            layer.alert(sFail);
+                        }
+                    });
 
-                            // 可以对父窗口进行刷新
-                            xadmin.father_reload();
-                        });
+                    layer.closeAll("loading");
                     return false;
-                });
 
-        });</script>
+
+
+
+
+                    //console.log(data);
+                    ////发异步，把数据提交给php
+                    //layer.alert("增加成功", {
+                    //    icon: 6
+                    //},
+                    //    function () {
+                    //        //关闭当前frame
+                    //        xadmin.close();
+
+                    //        // 可以对父窗口进行刷新
+                    //        xadmin.father_reload();
+                    //    });
+                    //return false;
+                });
+        });
+</script>
 

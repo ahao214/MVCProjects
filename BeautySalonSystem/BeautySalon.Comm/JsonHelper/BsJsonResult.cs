@@ -35,7 +35,7 @@ namespace BeautySalon.Comm.JsonHelper
             return new BsJsonResult(JsonResultType.WrongCode, msg).StringToJson();
         }
 
-        public string FailResult(string msg = "登录失败")
+        public string ErrorResult(string msg = "登录失败")
         {
             return new BsJsonResult(JsonResultType.Error, msg).StringToJson();
         }
