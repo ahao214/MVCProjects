@@ -49,15 +49,15 @@ namespace BeautySalon.LogicBLL.TableBLL
         }
         #endregion
 
-        #region 更新用户信息(根据用户ID)
+        #region 更新用户信息
         /// <summary>
-        /// 更新用户信息(根据用户ID)
+        /// 更新用户信息
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public bool UpdateUserAdminById(UserAdmin userAdmin)
+        public bool UpdateUserAdmin(UserAdmin userAdmin)
         {
-            return UserAdminDAL.UpdateUserAdminById(userAdmin);
+            return UserAdminDAL.UpdateUserAdmin(userAdmin);
         }
         #endregion
 

@@ -105,13 +105,13 @@ namespace BeautySalon.DataDAL.TableDAL
         }
         #endregion
 
-        #region 更新用户信息(根据用户ID)
+        #region 更新用户信息
         /// <summary>
-        /// 更新用户信息(根据用户ID)
+        /// 更新用户信息
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="userAdmin"></param>
         /// <returns></returns>
-        public static bool UpdateUserAdminById(UserAdmin userAdmin)
+        public static bool UpdateUserAdmin(UserAdmin userAdmin)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE UserAdmin SET RealName=@RealName,Telphone=@Telphone,ModifyTime=@ModifyTime WHERE UserId=@UserId AND UserStatus=1");
