@@ -351,10 +351,20 @@ namespace BeautySalon.Controllers
         /// 更改用户状态
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult UpdateStatus(UserAdmin userAdmin)
         {
+            // 先对UserId进行验证
+            if (!CommDefine.IsDigital(userAdmin.UserId.ToString()))
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
+            }
+            if (!userAdminBLL.UpdateUserStatusById(userAdmin))
+            {
+                return Content(bsJsonResult.ErrorResult("用户状态更新失败"));
+            }
 
-            return Content("OK");
+            return Content(bsJsonResult.SuccessResult("用户状态更新成功"));
         }
 
         #endregion

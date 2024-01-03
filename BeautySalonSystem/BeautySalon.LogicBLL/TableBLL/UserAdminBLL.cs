@@ -126,5 +126,17 @@ namespace BeautySalon.LogicBLL.TableBLL
 
         #endregion
 
+        #region 更新用户状态
+        /// <summary>
+        /// 更新用户状态
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public bool UpdateUserStatusById(UserAdmin userAdmin)
+        {
+            return UserAdminDAL.UpdateUserStatusById(userAdmin);
+        }
+        #endregion
+
     }
 }

@@ -75,27 +75,27 @@
                                     <td>@userAdmin.LoginIP</td>
                                     <td>@userAdmin.UserStatus</td>
                                     <td class="td-status">
-                                        @if(iUserStatus == 1)
+                                        @if (iUserStatus == 1)
                                         {
                                             <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
                                         }
                                         else
                                         {
-                                            <span class="layui-btn layui-btn-disabled layui-btn-mini">已禁用</span>
+                                            <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
                                         }
                                     </td>
 
                                     <td class="td-manage">
-                                        @if(iUserStatus == 1)
+                                        @if (iUserStatus == 1)
                                         {
-                                            <a onclick="member_stop(this,'@sUserId:0')" href="javascript:;" title="启用">
-                                            <i class="layui-icon">&#xe601;</i>
+                                            <a onclick="member_stop(this,'@sUserId')" href="javascript:;" title="启用">
+                                                <i class="layui-icon">&#xe601;</i>
                                             </a>
                                         }
                                         else
                                         {
-                                            <a onclick="member_stop(this,'@sUserId:1')" href="javascript:;" title="停用">
-                                            <i class="layui-icon">&#xe62f;</i>
+                                            <a onclick="member_stop(this,'@sUserId')" href="javascript:;" title="停用">
+                                                <i class="layui-icon">&#xe62f;</i>
                                             </a>
                                         }
 
@@ -172,12 +172,8 @@
     /*用户-停用*/
     function member_stop(obj, id) {
         var title = $(obj).attr('title') == "启用" ? "停用" : "启用";
-        layer.confirm('确认要' + title + '吗？', function (index) {
-            var ids = id.split(":");
-            var userId = ids[0];
-            var userStatus = ids[1];
+        layer.confirm('确认要' + title + '此用户吗？', function (index) {
             if ($(obj).attr('title') == '启用') {
-
                 //发异步把用户状态进行更改
                 $(obj).attr('title', '停用')
                 $(obj).find('i').html('&#xe62f;');
@@ -195,25 +191,21 @@
 
             // 发送get请求
             $.ajax({
-                url: '/UserAdmin/UpdateStatus?userId=' + userId + '&userStatus=' + userStatus,
+                url: '/UserAdmin/UpdateStatus?userId=' + id,
                 type: 'get',
                 data: index.field,
                 dataType: 'json',
-                success: function (data) {                   
-                    var sMsg = data.Msg;                    
+                success: function (data) {
+                    var sMsg = data.Msg;
                     if (data.ResultType == 1) {
-                        layer.alert(sMsg, { icon: 6 }, function () {
-
-                        });
+                        layer.alert(sMsg, { icon: 6 });
                     }
-                    else if (data.ResultType == 2) {
-                        layer.alert(sMsg, { icon: 2 })
-                    } else {
+                    else {
                         layer.alert(sMsg, { icon: 2 })
                     }
                 },
                 error: function (err) {
-                    
+
                 }
 
             });
