@@ -267,12 +267,12 @@ namespace BeautySalon.Controllers
         [HttpGet]
         public ActionResult EditUserAdmin(string userId)
         {
-            UserAdmin userAdmin = userAdminBLL.GetUserAdminById(Convert.ToInt32(User));
-            if (userAdmin == null)
+            UserAdmin userAdmin = userAdminBLL.GetUserAdminById(Convert.ToInt32(userId));
+            if (userAdmin is null)
             {
-
+                return RedirectToAction("Index", "Error");
             }
-            return View();
+            return View(userAdmin);
         }
 
         #endregion
