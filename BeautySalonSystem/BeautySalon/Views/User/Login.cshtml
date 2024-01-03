@@ -82,7 +82,7 @@
                                 layer.alert(data.Msg, {
                                     icon: 6
                                 }, function () {
-                                    window.location.href = "/Home/Index";
+                                    window.top.location.href = "/Home/Index";
                                 });
                             } else if (data.ResultType == 2) {
                                 layer.alert(data.Msg, { icon: 2 });
