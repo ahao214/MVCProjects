@@ -100,5 +100,18 @@ namespace BeautySalon.LogicBLL.TableBLL
 
         #endregion
 
+        #region 根据手机号得到用户
+        /// <summary>
+        /// 根据手机号得到用户
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public UserAdmin GetUserAdminByTelphone(UserAdmin userAdmin)
+        {
+            return UserAdminDAL.GetUserAdminByTelphone(userAdmin);
+        }
+
+        #endregion
+
     }
 }

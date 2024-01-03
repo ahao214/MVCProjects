@@ -208,9 +208,7 @@ namespace BeautySalon.DataDAL.TableDAL
             {
                 result = new UserAdmin
                 {
-                    UserId = (int)dr["UserId"],
-                    UserName = (string)dr["UserName"],
-                    Password = (string)dr["Password"],                    
+                    UserName = (string)dr["UserName"]
                 };
             }
             return result;
@@ -218,8 +216,33 @@ namespace BeautySalon.DataDAL.TableDAL
 
         #endregion
 
-        #region 手机后是否重复
+        #region 根据手机号得到用户
+        /// <summary>
+        /// 根据手机号得到用户
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public static UserAdmin GetUserAdminByTelphone(UserAdmin userAdmin)
+        {
+            UserAdmin result = default;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT Telphone FROM UserAdmin WHERE Telphone=@Telphone");
 
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@Telphone",userAdmin.Telphone)
+            };
+
+            DataTable dt = SqlHelper.GetDataTable(sb.ToString(), 1, paras);
+            foreach (DataRow dr in dt.Rows)
+            {
+                result = new UserAdmin
+                {
+                    Telphone = (string)dr["Telphone"]
+                };
+            }
+            return result;
+        }
 
         #endregion
 
