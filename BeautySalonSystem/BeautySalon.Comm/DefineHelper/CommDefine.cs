@@ -54,6 +54,19 @@ namespace BeautySalon.Comm.DefineHelper
 
         #endregion
 
+        #region 验证是否是纯数字
+        /// <summary>
+        /// 验证是否是纯数字
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static bool IsDigital(string val)
+        {
+            return Regex.IsMatch(val, "^[0-9]+$");
+        }
+
+        #endregion
+
 
     }
 }
