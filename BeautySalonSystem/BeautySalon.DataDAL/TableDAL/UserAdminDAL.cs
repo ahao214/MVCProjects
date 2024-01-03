@@ -186,5 +186,42 @@ namespace BeautySalon.DataDAL.TableDAL
         }
         #endregion
 
+        #region 根据用户名得到用户
+        /// <summary>
+        /// 根据用户名得到用户
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public static UserAdmin GetUserAdminByUserName(UserAdmin userAdmin)
+        {
+            UserAdmin result = default;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT UserName FROM UserAdmin WHERE UserName=@UserName");
+
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@UserName",userAdmin.UserName)
+            };
+
+            DataTable dt = SqlHelper.GetDataTable(sb.ToString(), 1, paras);
+            foreach (DataRow dr in dt.Rows)
+            {
+                result = new UserAdmin
+                {
+                    UserId = (int)dr["UserId"],
+                    UserName = (string)dr["UserName"],
+                    Password = (string)dr["Password"],                    
+                };
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region 手机后是否重复
+
+
+        #endregion
+
     }
 }

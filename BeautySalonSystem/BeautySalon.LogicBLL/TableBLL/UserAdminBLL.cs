@@ -87,5 +87,18 @@ namespace BeautySalon.LogicBLL.TableBLL
         }
         #endregion
 
+        #region 根据用户名得到用户
+        /// <summary>
+        /// 根据用户名得到用户
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public UserAdmin GetUserAdminByUserName(UserAdmin userAdmin)
+        {
+            return UserAdminDAL.GetUserAdminByUserName(userAdmin);
+        }
+
+        #endregion
+
     }
 }
