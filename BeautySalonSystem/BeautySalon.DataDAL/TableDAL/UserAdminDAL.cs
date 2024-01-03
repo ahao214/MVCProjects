@@ -91,11 +91,11 @@ namespace BeautySalon.DataDAL.TableDAL
                 userAdmin = new UserAdmin
                 {
                     UserId = (int)dr["UserId"],
-                    UserName = (string)dr["UserName"],
-                    Password = (string)dr["Password"],
-                    RealName = (string)dr["RealName"],
-                    Telphone = (string)dr["Telphone"],
-                    LoginIP = (string)dr["LoginIP"],
+                    UserName = Convert.ToString(dr["UserName"]),
+                    Password = Convert.ToString(dr["Password"]),
+                    RealName = Convert.ToString(dr["RealName"]),
+                    Telphone = Convert.ToString(dr["Telphone"]),
+                    LoginIP = Convert.ToString(dr["LoginIP"]),
                     LoginTime = (DateTime)dr["LoginTime"],
                     ModifyTime = (DateTime)dr["ModifyTime"],
                     Salary = (decimal)dr["Salary"],

@@ -1,4 +1,8 @@
-﻿
+﻿@using BeautySalon.Models.TableModel
+@model UserAdmin
+
+
+
 @{
     ViewBag.Title = " 编辑用户";
     Layout = "~/Views/Shared/_LayoutOtherMaster.cshtml";
@@ -12,7 +16,7 @@
                     <span class="x-red">*</span>登录名
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="UserName" readonly="readonly" name="UserName" required="" lay-verify="LoginUserName"
+                    <input type="text" value="@Model.UserName" id="UserName" readonly="readonly" name="UserName" required="" lay-verify="LoginUserName"
                            autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
@@ -25,7 +29,7 @@
                     <span class="x-red">*</span>真实姓名
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_Realname" name="RealName" required="" lay-verify="NickRealName" autocomplete="off" class="layui-input" >
+                    <input type="text" value="@Model.RealName" id="L_Realname" name="RealName" required="" lay-verify="NickRealName" autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
@@ -34,7 +38,7 @@
                     <span class="x-red">*</span>手机
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="Telphone" name="Telphone" required="" lay-verify="phone"
+                    <input type="text" value="@Model.Telphone" id="Telphone" name="Telphone" required="" lay-verify="phone"
                            autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">

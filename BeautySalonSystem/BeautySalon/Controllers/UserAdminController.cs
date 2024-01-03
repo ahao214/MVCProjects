@@ -3,6 +3,7 @@ using BeautySalon.Comm.JsonHelper;
 using BeautySalon.Filter;
 using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -264,9 +265,13 @@ namespace BeautySalon.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult EditUserAdmin(int UserId)
+        public ActionResult EditUserAdmin(string userId)
         {
+            UserAdmin userAdmin = userAdminBLL.GetUserAdminById(Convert.ToInt32(User));
+            if (userAdmin == null)
+            {
 
+            }
             return View();
         }
 
