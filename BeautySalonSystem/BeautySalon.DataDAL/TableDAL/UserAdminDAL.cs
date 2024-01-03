@@ -255,13 +255,14 @@ namespace BeautySalon.DataDAL.TableDAL
         public static bool AddUserAdmin(UserAdmin input)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO UserAdmin(UserName,Password,Telphone) VALUES(@UserName,@Password,@Telphone)");
+            sb.Append("INSERT INTO UserAdmin(UserName,Password,Telphone,UserStatus) VALUES(@UserName,@Password,@Telphone,@UserStatus)");
 
             SqlParameter[] paras =
             {
                 new SqlParameter ("@UserName",input.UserName),
                 new SqlParameter ("@Password",input.Password.StringToMdFive()),
                 new SqlParameter ("@Telphone",input.Telphone),
+                new SqlParameter ("@UserStatus",1),
             };
 
             return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;

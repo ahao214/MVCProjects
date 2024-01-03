@@ -258,5 +258,19 @@ namespace BeautySalon.Controllers
 
         #endregion
 
+        #region 编辑管理员视图页面
+        /// <summary>
+        /// 编辑管理员视图页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditUserAdmin(int UserId)
+        {
+
+            return View();
+        }
+
+        #endregion
+
     }
 }

@@ -318,6 +318,7 @@
     <Content Include="Views\UserAdmin\ModifyPass.cshtml" />
     <Content Include="Views\UserAdmin\AdminList.cshtml" />
     <Content Include="Views\UserAdmin\AddUserAdmin.cshtml" />
+    <Content Include="Views\UserAdmin\EditUserAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
