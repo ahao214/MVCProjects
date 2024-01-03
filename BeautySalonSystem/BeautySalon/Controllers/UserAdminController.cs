@@ -267,10 +267,15 @@ namespace BeautySalon.Controllers
         [HttpGet]
         public ActionResult EditUserAdmin(string userId)
         {
+            // 先对UserId进行验证
+            if (!CommDefine.IsDigital(userId))
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
+            }
             UserAdmin userAdmin = userAdminBLL.GetUserAdminById(Convert.ToInt32(userId));
             if (userAdmin is null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "查询不到相关信息" });
             }
             return View(userAdmin);
         }
