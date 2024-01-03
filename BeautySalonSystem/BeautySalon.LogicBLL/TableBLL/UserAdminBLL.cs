@@ -138,5 +138,16 @@ namespace BeautySalon.LogicBLL.TableBLL
         }
         #endregion
 
+        #region 删除用户
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        public bool UpdateUserDeleteById(UserAdmin userAdmin)
+        {
+            return UserAdminDAL.UpdateUserDeleteById(userAdmin);
+        }
+        #endregion
     }
 }
