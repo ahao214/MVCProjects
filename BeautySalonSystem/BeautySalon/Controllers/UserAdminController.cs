@@ -346,5 +346,17 @@ namespace BeautySalon.Controllers
 
         #endregion
 
+        #region 更改用户状态
+        /// <summary>
+        /// 更改用户状态
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateStatus(UserAdmin userAdmin)
+        {
+
+            return Content("OK");
+        }
+
+        #endregion
     }
 }

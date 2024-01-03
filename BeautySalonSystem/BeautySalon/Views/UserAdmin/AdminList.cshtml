@@ -64,6 +64,7 @@
                             @foreach (UserAdmin userAdmin in Model)
                             {
                                 string sUserId = userAdmin.UserId.ToString();
+                                int iUserStatus = userAdmin.UserStatus;
                                 <tr>
                                     <td>
                                         <input type="checkbox" name="@sUserId" value="1" lay-skin="primary">
@@ -74,18 +75,38 @@
                                     <td>@userAdmin.LoginIP</td>
                                     <td>@userAdmin.UserStatus</td>
                                     <td class="td-status">
-                                        <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                                        @if(iUserStatus == 1)
+                                        {
+                                            <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="layui-btn layui-btn-disabled layui-btn-mini">已禁用</span>
+                                        }
                                     </td>
+
                                     <td class="td-manage">
-                                        <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
+                                        @if(iUserStatus == 1)
+                                        {
+                                            <a onclick="member_stop(this,'@sUserId:0')" href="javascript:;" title="启用">
                                             <i class="layui-icon">&#xe601;</i>
-                                        </a>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a onclick="member_stop(this,'@sUserId:1')" href="javascript:;" title="停用">
+                                            <i class="layui-icon">&#xe62f;</i>
+                                            </a>
+                                        }
+
                                         <a title="编辑" onclick="xadmin.open('编辑','/UserAdmin/EditUserAdmin?UserId=@sUserId',600,400)" href="javascript:;">
                                             <i class="layui-icon">&#xe642;</i>
                                         </a>
+
                                         <a onclick="xadmin.open('修改密码','/UserAdmin/EditUserPass?UserId=@sUserId',600,400)" title="修改密码" href="javascript:;">
                                             <i class="layui-icon">&#xe631;</i>
                                         </a>
+
                                         <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                             <i class="layui-icon">&#xe640;</i>
                                         </a>
@@ -150,8 +171,11 @@
 
     /*用户-停用*/
     function member_stop(obj, id) {
-        layer.confirm('确认要停用吗？', function (index) {
-
+        var title = $(obj).attr('title') == "启用" ? "停用" : "启用";
+        layer.confirm('确认要' + title + '吗？', function (index) {
+            var ids = id.split(":");
+            var userId = ids[0];
+            var userStatus = ids[1];
             if ($(obj).attr('title') == '启用') {
 
                 //发异步把用户状态进行更改
@@ -159,15 +183,40 @@
                 $(obj).find('i').html('&#xe62f;');
 
                 $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!', { icon: 5, time: 1000 });
+                //layer.msg('已停用!', { icon: 5, time: 1000 });
 
             } else {
                 $(obj).attr('title', '启用')
                 $(obj).find('i').html('&#xe601;');
 
                 $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!', { icon: 5, time: 1000 });
+                //layer.msg('已启用!', { icon: 5, time: 1000 });
             }
+
+            // 发送get请求
+            $.ajax({
+                url: '/UserAdmin/UpdateStatus?userId=' + userId + '&userStatus=' + userStatus,
+                type: 'get',
+                data: index.field,
+                dataType: 'json',
+                success: function (data) {                   
+                    var sMsg = data.Msg;                    
+                    if (data.ResultType == 1) {
+                        layer.alert(sMsg, { icon: 6 }, function () {
+
+                        });
+                    }
+                    else if (data.ResultType == 2) {
+                        layer.alert(sMsg, { icon: 2 })
+                    } else {
+                        layer.alert(sMsg, { icon: 2 })
+                    }
+                },
+                error: function (err) {
+                    
+                }
+
+            });
 
         });
     }
