@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "添加用户";
+    Layout = "~/Views/Shared/_LayoutOtherMaster.cshtml";
+}
+
+
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="UserName" class="layui-form-label">
+                    <span class="x-red">*</span>登录名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="UserName" name="UserName" required="" lay-verify="LoginUserName"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>将会成为您唯一的登入名
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="Telphone" class="layui-form-label">
+                    <span class="x-red">*</span>手机
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="Telphone" name="Telphone" required="" lay-verify="phone"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_Password" class="layui-form-label">
+                    <span class="x-red">*</span>密码
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password"  id="L_Password" name="Password" required="" lay-verify="pass"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    6到16个字符
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_Repassword" class="layui-form-label">
+                    <span class="x-red">*</span>确认密码
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password" id="L_Repassword" name="Repassword" required="" lay-verify="repass"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_Repassword" class="layui-form-label">
+                </label>
+                <button class="layui-btn" lay-filter="add" lay-submit="">
+                    增加用户
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    layui.use(['form', 'layer'],
+        function () {
+            var form = layui.form;
+            var layer = layui.layer;
+
+            //自定义验证规则
+            form.verify({
+                LoginUserName: function (value) {
+                    if (value.length < 5 || value.length > 12) {
+                        return "登录名必须在5到12位之间";
+                    }
+                },
+                
+                pass: [/(.+){6,12}$/, "密码必须6到12位"],
+                repass: function (value) {
+                    if ($('#L_Password').val() != $('#L_Repassword').val()) {
+                        return "两次密码不一致";
+                    }
+                }
+            });
+
+            //监听提交
+            form.on('submit(add)',
+                function (data) {
+                    layer.load(3);                    
+                    $.ajax({
+                        url: '/UserAdmin/AddUserAdmin',
+                        type: 'post',
+                        data: data.field,
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            console.log(data.Msg);
+                            console.log(data.ResultType);
+                            var sMsg = data.Msg;
+                            var sFail = data.Msg;
+                            if (data.ResultType == 1) {
+                                // 更新成功
+                                layer.alert(sMsg, { icon: 6 }, function () {
+                                    xadmin.close();
+                                });
+                            }
+                            else {
+                                // 更新失败
+                                layer.alert(sMsg, { icon: 2 });
+                            }
+                        },
+                        error: function (err) {
+                            layer.alert(sFail);
+                        }
+                    });
+
+                    layer.closeAll("loading");
+                    return false;
+
+                });
+
+        });</script>
+

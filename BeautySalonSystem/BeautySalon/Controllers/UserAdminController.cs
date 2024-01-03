@@ -3,6 +3,8 @@ using BeautySalon.Comm.JsonHelper;
 using BeautySalon.Filter;
 using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace BeautySalon.Controllers
@@ -23,7 +25,6 @@ namespace BeautySalon.Controllers
         /// </summary>
         private readonly UserAdminBLL userAdminBLL = new UserAdminBLL();
         #endregion
-
 
         #region 登录账户信息页面
         /// <summary>
@@ -89,8 +90,6 @@ namespace BeautySalon.Controllers
 
         #endregion
 
-
-
         #region 修改密码页面
         /// <summary>
         /// 修改密码页面
@@ -120,7 +119,6 @@ namespace BeautySalon.Controllers
         }
 
         #endregion
-
 
         #region 验证返回值
         /// <summary>
@@ -166,6 +164,90 @@ namespace BeautySalon.Controllers
             Session.Clear();
             return base.Redirect("/");
         }
+        #endregion
+
+        #region 返回管理员视图界面
+        /// <summary>
+        /// 返回管理员视图界面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AdminList()
+        {
+            List<UserAdmin> userAdmins = userAdminBLL.GetUserAdmin();
+
+            return View(userAdmins);
+        }
+
+        #endregion
+
+        #region 添加管理员视图页面
+        /// <summary>
+        /// 添加管理员视图页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult AddUserAdmin()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region 添加管理员视图页面
+        /// <summary>
+        /// 添加管理员视图页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddUserAdmin(UserAdmin userAdmin)
+        {
+            return Content(CheckAddUser(userAdmin));
+        }
+
+        #endregion
+
+        #region 验证添加用户的返回值
+        /// <summary>
+        /// 验证添加用户的返回值
+        /// </summary>
+        /// <param name="userAdmin"></param>
+        /// <returns></returns>
+        private string CheckAddUser(UserAdmin userAdmin)
+        {
+            string userName = userAdmin.UserName;
+            string telephone = userAdmin.Telphone;
+            string password = userAdmin.Password;
+            string repass = userAdmin.RePassword;
+
+            userAdmin.UserId = ((UserAdmin)(Session["LoginUser"])).UserId;
+            if (string.IsNullOrEmpty(userName) || userName.Length < 5 || userName.Length > 12)
+            {
+                return bsJsonResult.ErrorResult("登录名必须在5到12位之间");
+            }
+
+            if (!CommDefine.IsPhone(telephone))
+            {
+                return bsJsonResult.ErrorResult("手机号必须是11位");
+            }
+            if (string.IsNullOrEmpty(password))
+            {
+                return bsJsonResult.ErrorResult("密码不能为空");
+            }
+            if (password.Length > 12 || password.Length < 6)
+            {
+                return bsJsonResult.ErrorResult("密码必须在6到12位");
+            }
+            if (!repass.Equals(password))
+            {
+                return bsJsonResult.ErrorResult("两次密码输入不一致");
+            }
+            if (!userAdminBLL.UpdateUserAdmin(userAdmin))
+            {
+                return bsJsonResult.ErrorResult("用户添加失败");
+            }
+            return bsJsonResult.SuccessResult("用户添加成功");
+        }
+
         #endregion
 
     }
