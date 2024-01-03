@@ -135,7 +135,7 @@ namespace BeautySalon.Controllers
         {
             string password = userAdmin.Password;
             string rePassword = userAdmin.RePassword;
-            userAdmin.UserId = ((UserAdmin)(Session["LoginUser"])).UserId;
+            //userAdmin.UserId = ((UserAdmin)(Session["LoginUser"])).UserId;
             if (string.IsNullOrEmpty(password))
             {
                 return bsJsonResult.ErrorResult("密码不能为空");
@@ -300,6 +300,48 @@ namespace BeautySalon.Controllers
                 return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
             }
             return Content(CheckUserInfo(userAdmin));
+        }
+
+        #endregion
+
+        #region 编辑用户密码视图界面
+        /// <summary>
+        /// 编辑用户密码视图界面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditUserPass(string userId)
+        {
+            // 先对UserId进行验证
+            if (!CommDefine.IsDigital(userId))
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
+            }
+            UserAdmin userAdmin = userAdminBLL.GetUserAdminById(Convert.ToInt32(userId));
+            if (userAdmin is null)
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "查询不到相关信息" });
+            }
+            return View(userAdmin);
+        }
+
+        #endregion
+
+        #region 编辑用户密码业务逻辑
+        /// <summary>
+        /// 编辑用户密码业务逻辑
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditUserPass(UserAdmin userAdmin)
+        {
+            // 先对UserId进行验证
+            if (!CommDefine.IsDigital(userAdmin.UserId.ToString()))
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
+            }
+
+            return Content(CheckPassword(userAdmin));
         }
 
         #endregion

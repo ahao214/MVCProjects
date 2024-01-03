@@ -2,10 +2,10 @@
 @model UserAdmin
 
 @{
-    ViewBag.Title = "密码修改";
+    ViewBag.Title = "编辑用户密码";
     Layout = "~/Views/Shared/_LayoutOtherMaster.cshtml";
-
 }
+
 
 
 <div class="layui-fluid">
@@ -42,8 +42,8 @@
             </div>
             <div class="layui-form-item">
                 <label for="L_RePassword" class="layui-form-label"></label>
-                <button class="layui-btn" lay-filter="updatePwd" lay-submit="">修改密码</button>
-                <input type="hidden" name="UserId" value="@Model.UserId" />
+                <button class="layui-btn" lay-filter="updatePwd" lay-submit="">编辑密码</button>
+                <input type="hidden" name="UserId" value="@Model.UserId"/>
             </div>
         </form>
     </div>
@@ -67,10 +67,10 @@
             //监听提交
             form.on('submit(updatePwd)',
                 function (data) {
-                    console.log("修改密码")
+                    console.log("编辑密码")
                     layer.load(3);
                     $.ajax({
-                        url: '/UserAdmin/UpdatePwd',
+                        url: '/UserAdmin/EditUserPass',
                         type: 'post',
                         data: data.field,
                         dataType: 'json',
@@ -105,4 +105,3 @@
                 });
 
         });</script>
-
