@@ -368,5 +368,28 @@ namespace BeautySalon.Controllers
         }
 
         #endregion
+
+        #region 软删除用户
+        /// <summary>
+        /// 软删除用户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult SofteDelete(UserAdmin userAdmin)
+        {
+            // 先对UserId进行验证
+            if (!CommDefine.IsDigital(userAdmin.UserId.ToString()))
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
+            }
+            if (!userAdminBLL.SofteDelete(userAdmin))
+            {
+                return Content(bsJsonResult.ErrorResult("用户删除失败"));
+            }
+
+            return Content(bsJsonResult.SuccessResult("用户删除成功"));
+        }
+
+        #endregion
     }
 }

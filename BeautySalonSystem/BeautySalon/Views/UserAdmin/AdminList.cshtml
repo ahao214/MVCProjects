@@ -210,10 +210,25 @@
     /*用户-删除*/
     function member_del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
-
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', { icon: 1, time: 1000 });
+            // 发送get请求
+            $.ajax({
+                url: '/UserAdmin/SofteDelete?userId=' + id,
+                type: 'get',
+                data: index.field,
+                dataType: 'json',
+                success: function (data) {
+                    var sMsg = data.Msg;
+                    if (data.ResultType == 1) {
+                        layer.alert(sMsg, { icon: 1 });
+                        //发异步删除数据
+                        $(obj).parents("tr").remove();                        
+                    }
+                    else {
+                        layer.alert(sMsg, { icon: 2 })
+                    }
+                },
+            });
+            
         });
     }
 

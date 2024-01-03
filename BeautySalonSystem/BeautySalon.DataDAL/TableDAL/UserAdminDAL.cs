@@ -293,13 +293,13 @@ namespace BeautySalon.DataDAL.TableDAL
         #endregion
 
 
-        #region 删除用户
+        #region 软删除用户
         /// <summary>
-        /// 删除用户
+        /// 软删除用户
         /// </summary>
         /// <param name="userAdmin"></param>
         /// <returns></returns>
-        public static bool UpdateUserDeleteById(UserAdmin userAdmin)
+        public static bool SofteDelete(UserAdmin userAdmin)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE UserAdmin SET IsDelete=ABS(IsDelete-1),ModifyTime=@ModifyTime WHERE UserId=@UserId");
