@@ -178,8 +178,12 @@ namespace BeautySalon.Controllers
         /// <returns></returns>
         public ActionResult AdminList()
         {
+            string keys = string.Empty;
             List<UserAdmin> userAdmins = userAdminBLL.GetUserAdmin();
-
+            if (!string.IsNullOrEmpty(keys))
+            {
+                userAdmins = userAdmins.Where(p => p.UserName.Contains(keys) || p.Telphone.Contains(keys)).ToList();
+            }
             return View(userAdmins);
         }
 

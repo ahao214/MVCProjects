@@ -33,7 +33,7 @@
                                 <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end">
                             </div>*@
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入管理员名" autocomplete="off" class="layui-input">
+                            <input type="text" name="Keys" placeholder="请输入关键字" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -219,7 +219,7 @@
                 success: function (data) {
                     var sMsg = data.Msg;
                     if (data.ResultType == 1) {
-                        layer.alert(sMsg, { icon: 1 });
+                        layer.alert(sMsg, { icon: 6 });
                         //发异步删除数据
                         $(obj).parents("tr").remove();                        
                     }

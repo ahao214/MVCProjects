@@ -78,7 +78,7 @@ namespace BeautySalon.DataDAL.TableDAL
         {
             UserAdmin userAdmin = default;
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM UserAdmin WHERE UserId=@UserId AND UserStatus=1");
+            sb.Append("SELECT * FROM UserAdmin WHERE UserId=@UserId AND UserStatus=1 AND IsDelete = 0");
 
             SqlParameter[] paras =
             {
