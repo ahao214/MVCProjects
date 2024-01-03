@@ -178,7 +178,7 @@ namespace BeautySalon.Controllers
         /// <returns></returns>
         public ActionResult AdminList()
         {
-            string keys = string.Empty;
+            string keys = Request.QueryString["Keys"];
             List<UserAdmin> userAdmins = userAdminBLL.GetUserAdmin();
             if (!string.IsNullOrEmpty(keys))
             {
