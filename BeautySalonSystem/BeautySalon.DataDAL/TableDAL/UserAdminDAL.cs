@@ -174,7 +174,7 @@ namespace BeautySalon.DataDAL.TableDAL
                     Password = (string)dr["Password"],
                     RealName = (string)dr["RealName"],
                     Telphone = (string)dr["Telphone"],
-                    LoginIP = (string)dr["LoginIP"],
+                    LoginIP = Convert.ToString(dr["LoginIP"]),
                     LoginTime = (DateTime)dr["LoginTime"],
                     ModifyTime = (DateTime)dr["ModifyTime"],
                     Salary = (decimal)dr["Salary"],
@@ -242,6 +242,29 @@ namespace BeautySalon.DataDAL.TableDAL
                 };
             }
             return result;
+        }
+
+        #endregion
+
+        #region 添加用户
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool AddUserAdmin(UserAdmin input)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("INSERT INTO UserAdmin(UserName,Password,Telphone) VALUES(@UserName,@Password,@Telphone)");
+
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@UserName",input.UserName),
+                new SqlParameter ("@Password",input.Password.StringToMdFive()),
+                new SqlParameter ("@Telphone",input.Telphone),
+            };
+
+            return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
         }
 
         #endregion

@@ -241,7 +241,15 @@ namespace BeautySalon.Controllers
             {
                 return bsJsonResult.ErrorResult("两次密码输入不一致");
             }
-            if (!userAdminBLL.UpdateUserAdmin(userAdmin))
+            if (!(userAdminBLL.GetUserAdminByUserName(userAdmin) is null))
+            {
+                return bsJsonResult.ErrorResult("该用户已经存在");
+            }
+            if (!(userAdminBLL.GetUserAdminByTelphone(userAdmin) is null))
+            {
+                return bsJsonResult.ErrorResult("该手机号已经存在");
+            }
+            if (!userAdminBLL.AddUserAdmin(userAdmin))
             {
                 return bsJsonResult.ErrorResult("用户添加失败");
             }

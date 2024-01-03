@@ -113,5 +113,18 @@ namespace BeautySalon.LogicBLL.TableBLL
 
         #endregion
 
+        #region 添加用户
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public bool AddUserAdmin(UserAdmin input)
+        {
+            return UserAdminDAL.AddUserAdmin(input);
+        }
+
+        #endregion
+
     }
 }
