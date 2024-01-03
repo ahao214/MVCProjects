@@ -162,7 +162,7 @@ namespace BeautySalon.DataDAL.TableDAL
             UserAdmin userAdmin = default;
             List<UserAdmin> list = new List<UserAdmin>();
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM UserAdmin ORDER BY UserId ASC");
+            sb.Append("SELECT * FROM UserAdmin WHERE IsDelete = 0 ORDER BY UserId ASC");
 
             DataTable dt = SqlHelper.GetDataTable(sb.ToString(), 1);
             foreach (DataRow dr in dt.Rows)
