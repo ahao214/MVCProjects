@@ -53,7 +53,11 @@ namespace BeautySalon.Controllers
         /// <returns></returns>
         public ActionResult UpdateAccount(UserAdmin userAdmin)
         {
-
+            // 先对UserId进行验证
+            if (!CommDefine.IsDigital(Convert.ToString(userAdmin.UserId)))
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
+            }
             return Content(CheckUserInfo(userAdmin));
         }
 
@@ -69,7 +73,7 @@ namespace BeautySalon.Controllers
         {
             string realName = userAdmin.RealName;
             string telephone = userAdmin.Telphone;
-            userAdmin.UserId = ((UserAdmin)(Session["LoginUser"])).UserId;
+            //userAdmin.UserId = ((UserAdmin)(Session["LoginUser"])).UserId;
             if (string.IsNullOrEmpty(realName) || realName.Length == 0)
             {
                 return bsJsonResult.ErrorResult("真实姓名必须为汉字");
@@ -278,6 +282,24 @@ namespace BeautySalon.Controllers
                 return RedirectToAction("Index", "Error", new { ErrorMessage = "查询不到相关信息" });
             }
             return View(userAdmin);
+        }
+
+        #endregion
+
+        #region 编辑管理员业务逻辑
+        /// <summary>
+        /// 编辑管理员业务逻辑
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditUserAdmin(UserAdmin userAdmin)
+        {
+            // 先对UserId进行验证
+            if (!CommDefine.IsDigital(Convert.ToString(userAdmin.UserId)))
+            {
+                return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });
+            }
+            return Content(CheckUserInfo(userAdmin));
         }
 
         #endregion

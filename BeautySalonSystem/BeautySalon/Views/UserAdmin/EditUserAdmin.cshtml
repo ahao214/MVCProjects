@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="layui-form-item">
+            @*<div class="layui-form-item">
                 <label for="L_Password" class="layui-form-label">
                     <span class="x-red">*</span>密码
                 </label>
@@ -64,13 +64,14 @@
                     <input type="password" id="L_Repassword" name="Repassword" required="" lay-verify="repass"
                            autocomplete="off" class="layui-input">
                 </div>
-            </div>
+            </div>*@
             <div class="layui-form-item">
                 <label for="L_Repassword" class="layui-form-label">
                 </label>
                 <button class="layui-btn" lay-filter="add" lay-submit="">
                     编辑用户资料
                 </button>
+                <input type="hidden" name="UserId" value="@Model.UserId"/>
             </div>
         </form>
     </div>
@@ -93,13 +94,14 @@
                         return '真实姓名至少得2个字符';
                     }
                 },
+                
 
-                pass: [/(.+){6,12}$/, "密码必须6到12位"],
-                repass: function (value) {
-                    if ($('#L_Password').val() != $('#L_Repassword').val()) {
-                        return "两次密码不一致";
-                    }
-                }
+                //pass: [/(.+){6,12}$/, "密码必须6到12位"],
+                //repass: function (value) {
+                //    if ($('#L_Password').val() != $('#L_Repassword').val()) {
+                //        return "两次密码不一致";
+                //    }
+                //}
             });
 
             //监听提交
