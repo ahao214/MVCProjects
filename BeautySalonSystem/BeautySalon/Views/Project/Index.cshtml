@@ -28,7 +28,7 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input class="layui-input" placeholder="分类名称" name="ProjectName" id="LProjectName">
+                            <input class="layui-input" placeholder="分类名称" name="ProjectName"  lay-verify="LProjectName">
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button class="layui-btn" lay-submit="" lay-filter="projectAdd"><i class="layui-icon"></i>增加</button>
@@ -243,7 +243,7 @@
                     }
                 },
                 error: function (err) {
-                    layer.alert("登录失败", {
+                    layer.alert("添加失败", {
                         icon: 2
                     });                    
                 }
@@ -253,7 +253,7 @@
         });
     });
 
-    /*用户-删除*/
+    /*项目-删除*/
     function member_del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
             //发异步删除数据
