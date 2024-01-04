@@ -342,16 +342,26 @@ namespace BeautySalon.DataDAL.TableDAL
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public static bool SofteDelAllUserById(string[] ids)
+        public static bool SofteDelAllUser(string[] ids)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("UPDATE UserAdmin SET IsDelete=ABS(IsDelete-1),ModifyTime=@ModifyTime WHERE UserId=@UserId");
-
-            SqlParameter[] paras =
+            string userIds = string.Empty;
+            int count = ids.Length;
+            SqlParameter[] paras = new SqlParameter[count];
+            for (int i = 0; i < count; i++)
             {
-                new SqlParameter ("@UserId",ids.ToString()),
-                new SqlParameter ("@ModifyTime",DateTime.Now)
-            };
+                if (i == count - 1)
+                {
+                    userIds += "@UserId" + i;
+                }
+                else
+                {
+                    userIds += "@UserId" + i + ",";
+                }
+                // 构建SqlParameter
+                paras[i] = new SqlParameter("@UserId" + i, Convert.ToInt32(ids[i]));
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.Append("UPDATE UserAdmin SET IsDelete=ABS(IsDelete-1) WHERE UserId in (" + userIds + ")");
 
             return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
         }

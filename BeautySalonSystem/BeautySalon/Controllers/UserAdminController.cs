@@ -415,19 +415,23 @@ namespace BeautySalon.Controllers
                 return Content(bsJsonResult.ErrorResult("用户删除失败"));
             }
             // 校验每个值是否为纯数字
-            for (int i = 0; i < iLen; i++)
-            {                
-                if (!CommDefine.IsDigital(ids[i]))
-                {
-                    return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });                    
-                }
-                else
-                {
-                    if(!userAdminBLL.SofteDelUserById(Convert.ToInt32(ids[i])))
-                        return Content(bsJsonResult.ErrorResult("用户删除失败"));
-                }
+            //for (int i = 0; i < iLen; i++)
+            //{                
+            //    if (!CommDefine.IsDigital(ids[i]))
+            //    {
+            //        return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });                    
+            //    }
+            //    else
+            //    {
+            //        if(!userAdminBLL.SofteDelUserById(Convert.ToInt32(ids[i])))
+            //            return Content(bsJsonResult.ErrorResult("用户删除失败"));
+            //    }
+            //}
+            if (!userAdminBLL.SofteDelAllUser(ids))
+            {
+                return Content(bsJsonResult.ErrorResult("用户删除失败"));
             }
-
+                
             return Content(bsJsonResult.SuccessResult("用户删除成功"));
         }
 

@@ -162,6 +162,17 @@ namespace BeautySalon.LogicBLL.TableBLL
         }
         #endregion
 
+        #region 软删除用户
+        /// <summary>
+        /// 软删除用户
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool SofteDelAllUser(string[] ids)
+        {
+            return UserAdminDAL.SofteDelAllUser(ids);
+        }
+        #endregion
 
     }
 }
