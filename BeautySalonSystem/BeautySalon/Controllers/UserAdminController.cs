@@ -3,9 +3,11 @@ using BeautySalon.Comm.JsonHelper;
 using BeautySalon.Filter;
 using BeautySalon.LogicBLL.TableBLL;
 using BeautySalon.Models.TableModel;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web.Mvc;
 
 namespace BeautySalon.Controllers
@@ -392,6 +394,41 @@ namespace BeautySalon.Controllers
             }
 
             return Content(bsJsonResult.SuccessResult("用户删除成功"));
+        }
+
+        #endregion
+
+
+        #region 发送全选删除请求业务逻辑
+
+        /// <summary>
+        /// 发送全选删除请求业务逻辑
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SoftMultipleDelete(string[] ids)
+        {
+            int iLen = ids.Length;
+            if (iLen == 0)
+            {
+                return Content(bsJsonResult.ErrorResult("用户删除失败"));
+            }
+            // 校验每个值是否为纯数字
+            for (int i = 0; i < iLen; i++)
+            {                
+                if (!CommDefine.IsDigital(ids[i]))
+                {
+                    return RedirectToAction("Index", "Error", new { ErrorMessage = "传递参数不合法" });                    
+                }
+                else
+                {
+                    if(!userAdminBLL.SofteDelUserById(Convert.ToInt32(ids[i])))
+                        return Content(bsJsonResult.ErrorResult("用户删除失败"));
+                }
+            }
+
+            return Content(bsJsonResult.ErrorResult("用户删除成功"));
         }
 
         #endregion

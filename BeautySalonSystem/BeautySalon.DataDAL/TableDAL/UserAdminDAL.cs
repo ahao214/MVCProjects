@@ -313,5 +313,51 @@ namespace BeautySalon.DataDAL.TableDAL
             return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
         }
         #endregion
+
+        #region 软删除用户
+        /// <summary>
+        /// 软删除用户
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static bool SofteDelUserById(int userId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("UPDATE UserAdmin SET IsDelete=ABS(IsDelete-1),ModifyTime=@ModifyTime WHERE UserId=@UserId");
+
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@UserId",userId),
+                new SqlParameter ("@ModifyTime",DateTime.Now)
+            };
+
+            return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
+        }
+        #endregion
+
+
+        #region 软删除用户
+        /// <summary>
+        /// 软删除用户
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static bool SofteDelAllUserById(string[] ids)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("UPDATE UserAdmin SET IsDelete=ABS(IsDelete-1),ModifyTime=@ModifyTime WHERE UserId=@UserId");
+
+            SqlParameter[] paras =
+            {
+                new SqlParameter ("@UserId",ids.ToString()),
+                new SqlParameter ("@ModifyTime",DateTime.Now)
+            };
+
+            return SqlHelper.ExecuteNoneQuery(sb.ToString(), 1, paras) > 0;
+        }
+        #endregion
+
+
+
     }
 }

@@ -243,11 +243,31 @@
                 ids.push($(this).val())
             }
         });
-
-        layer.confirm('确认要删除吗？' + ids.toString(), function (index) {
+        if (ids.length == 0) {
+            layer.alert("至少选中一项,", { icon: 2, time: 2000, shade: 0.2 });
+            return;
+        }
+        layer.confirm('确认要删除吗？', function (index) {
             //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', { icon: 1 });
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+
+            $.post('/UserAdmin/SoftMultipleDelete', { 'ids': ids },
+                function (data) {
+                    var sMsg = data.Msg;
+                    if (data.ResultType == 1) {
+                        layer.alert(sMsg, { icon: 6,time:3000,shade:0.2 });
+                        $(".layui-form-checked").not('.header').parents('tr').remove();
+                    }
+                    else {
+                        layer.alert(sMsg, { icon: 2, time: 3000, shade: 0.2 });
+                    }  
+                },
+                'json'
+
+            );
+
+
+            //layer.msg('删除成功', { icon: 1 });
+            
         });
     }
 </script>
