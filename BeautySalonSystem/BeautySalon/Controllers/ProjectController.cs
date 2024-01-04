@@ -22,10 +22,17 @@ namespace BeautySalon.Controllers
         public ActionResult Index()
         {
             return View();
-        } 
+        }
         #endregion
 
+        #region
 
+        public ActionResult ProjectAdd()
+        {
+            return Content("OK");
+        }
+
+        #endregion
 
     }
 }
