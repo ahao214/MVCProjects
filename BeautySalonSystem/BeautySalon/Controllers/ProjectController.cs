@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautySalon.Filter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace BeautySalon.Controllers
     /// <summary>
     /// 项目控制器
     /// </summary>
+    [BeautySalonFilter] //加特性
     public class ProjectController : Controller
     {
         #region 返回项目分类视图页面

@@ -1,17 +1,21 @@
 ﻿
 @{
-    ViewBag.Title = "项目";
+    ViewBag.Title = "项目管理";
     Layout = "~/Views/Shared/_LayoutOtherMaster.cshtml";
 }
-<script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+
+@section Jquery{
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+}
+
 
 <div class="x-nav">
     <span class="layui-breadcrumb">
         <a href="">后台首页</a>
         <a href="/Project/Index">项目管理</a>
         @*<a>
-            <cite>导航元素</cite>
-        </a>*@
+                <cite>导航元素</cite>
+            </a>*@
     </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
