@@ -428,7 +428,7 @@ namespace BeautySalon.Controllers
                 }
             }
 
-            return Content(bsJsonResult.ErrorResult("用户删除成功"));
+            return Content(bsJsonResult.SuccessResult("用户删除成功"));
         }
 
         #endregion

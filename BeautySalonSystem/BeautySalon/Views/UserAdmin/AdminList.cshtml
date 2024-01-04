@@ -67,13 +67,14 @@
                                 int iUserStatus = userAdmin.UserStatus;
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="@sUserId" value="1" lay-skin="primary">
+                                        <input type="checkbox" name="@sUserId" value="@sUserId" lay-skin="primary">
                                     </td>
+                                    <td>@sUserId</td>
                                     <td>@userAdmin.UserName</td>
                                     <td>@userAdmin.RealName</td>
                                     <td>@userAdmin.Telphone</td>
                                     <td>@userAdmin.LoginIP</td>
-                                    <td>@userAdmin.UserStatus</td>
+                                    @*<td>@userAdmin.UserStatus</td>*@
                                     <td class="td-status">
                                         @if (iUserStatus == 1)
                                         {
@@ -247,9 +248,10 @@
             layer.alert("至少选中一项,", { icon: 2, time: 2000, shade: 0.2 });
             return;
         }
+
         layer.confirm('确认要删除吗？', function (index) {
             //捉到所有被选中的，发异步进行删除
-
+            layer.msg("正在删除中...", {icon:16,time:9000,shade:0.3})
             $.post('/UserAdmin/SoftMultipleDelete', { 'ids': ids },
                 function (data) {
                     var sMsg = data.Msg;
@@ -262,12 +264,8 @@
                     }  
                 },
                 'json'
-
             );
-
-
-            //layer.msg('删除成功', { icon: 1 });
-            
+            //layer.msg('删除成功', { icon: 1 });            
         });
     }
 </script>
