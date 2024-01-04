@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelperFile\SqlHelper.cs" />
+    <Compile Include="TableDAL\ProjectDAL.cs" />
     <Compile Include="TableDAL\UserAdminDAL.cs" />
   </ItemGroup>
   <ItemGroup>

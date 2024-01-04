@@ -1,4 +1,6 @@
-﻿using BeautySalon.Filter;
+﻿using BeautySalon.Comm.JsonHelper;
+using BeautySalon.Filter;
+using BeautySalon.Models.TableModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,13 @@ namespace BeautySalon.Controllers
     [BeautySalonFilter] //加特性
     public class ProjectController : Controller
     {
+        #region 返回json结果变量
+        /// <summary>
+        /// 返回json结果变量
+        /// </summary>
+        private readonly BsJsonResult bsJsonResult = new BsJsonResult();
+        #endregion
+
         #region 返回项目分类视图页面
         /// <summary>
         /// 返回项目分类视图页面
@@ -26,9 +35,19 @@ namespace BeautySalon.Controllers
         #endregion
 
         #region
-
-        public ActionResult ProjectAdd()
+        /// <summary>
+        /// 添加项目业务逻辑(根目录)
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ProjectAdd(Project project)
         {
+            string projectName = project.ProjectName;
+            if (string.IsNullOrEmpty(projectName) || projectName.Length == 0)
+            {
+                return Content(bsJsonResult.ErrorResult("分类名称至少一个字符"));
+            }
             return Content("OK");
         }
 

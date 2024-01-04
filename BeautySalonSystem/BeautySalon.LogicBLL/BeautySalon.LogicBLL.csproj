@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableBLL\ProjectBLL.cs" />
     <Compile Include="TableBLL\UserAdminBLL.cs" />
   </ItemGroup>
   <ItemGroup />
