@@ -28,5 +28,7 @@ namespace BeautySalon.LogicBLL.TableBLL
 
         #endregion
 
+
+
     }
 }
